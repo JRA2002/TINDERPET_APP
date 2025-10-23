@@ -2,12 +2,14 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from decouple import config
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-production')
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
