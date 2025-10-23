@@ -1,0 +1,59 @@
+### Python Specific ###
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.python-version
+env/
+venv/
+ENV/
+.venv/
+*.log
+*.sqlite3
+local_settings.py
+instance/
+migrations/*.py
+!migrations/__init__.py
+
+### Django Specific ###
+*.swp
+*.bak
+
+### Static and Media (If served by a separate server in production) ###
+
+
+### OS Specific ###
+.DS_Store
+Thumbs.db
+
+### Editor Specific ###
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+### Package Managers ###
+node_modules/
+yarn.lock
+package-lock.json
+
+### Secrets and Credentials (VERY IMPORTANT!) ###
+*.key
+*.pem
+*.crt
+*.password
+credentials.json
+config.ini
+secrets.ini
+.env
+
+### Logs and Temporary Files ###
+*.log
+*.tmp
+temp/
+tmp/
+logs/
+
+### Deployment Specific ###
+*.pth
+.DS_Store
