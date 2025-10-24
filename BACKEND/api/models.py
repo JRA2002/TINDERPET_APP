@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from cloudinary.models import CloudinaryField
 
 User = get_user_model()
 
@@ -25,7 +24,7 @@ class Pet(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     bio = models.TextField(max_length=500)
-    main_image = CloudinaryField('image', folder='tinderpet/pets/main')
+    main_image = models.URLField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -38,7 +37,7 @@ class Pet(models.Model):
 
 class PetImage(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='images')
-    image = CloudinaryField('image', folder='tinderpet/pets/gallery')
+    image = models.URLField(max_length=500)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
