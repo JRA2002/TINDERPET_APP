@@ -9,8 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "TinderPet - Encuentra el match perfecto para tu mascota",
-  description: "La app de citas para mascotas. Conecta con otras mascotas de tu misma raza.",
-    generator: 'v0.app'
+  description: "La app de citas para mascotas. Conecta con otras mascotas de tu misma raza."
 }
 
 export default function RootLayout({

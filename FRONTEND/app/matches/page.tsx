@@ -68,6 +68,7 @@ export default function MatchesPage() {
 
   const getOtherPet = (match: Match): Pet => {
     const userPetIds = userPets.map((p) => p.id)
+    console.log("el objeto que se devuelve:", match.pet1)
     return userPetIds.includes(match.pet1.id) ? match.pet2 : match.pet1
   }
 
@@ -87,7 +88,7 @@ export default function MatchesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50">
       <header className="border-b bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+        <div className="container mx-auto flex items-center justify-between px-4 py-4 text-muted-foreground">
           <Button asChild variant="ghost" size="sm">
             <Link href="/dashboard">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -129,6 +130,8 @@ export default function MatchesPage() {
             {matches.map((match) => {
               const otherPet = getOtherPet(match)
               const myPet = getMyPet(match)
+              console.log("aqui esta mi objeto Match:", myPet)
+              console.log("aqui esta el obejto Match otro:", otherPet)
 
               return (
                 <Card key={match.id} className="overflow-hidden">

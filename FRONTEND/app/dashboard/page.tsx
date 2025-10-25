@@ -100,12 +100,12 @@ export default function DashboardPage() {
             {activePet && (
               <div className="hidden items-center gap-2 rounded-full bg-[#6bcf7f]/10 px-3 py-1 md:flex">
                 <Check className="h-4 w-4 text-[#6bcf7f]" />
-                <span className="text-sm font-medium">Activo: {activePet.name}</span>
+                <span className="text-sm text-muted-foreground font-medium">Activo: {activePet.name}</span>
               </div>
             )}
-            <span className="text-sm text-muted-foreground">{user?.email}</span>
+            <span className="text-sm text-gray-500">{user?.email}</span>
             <Button variant="ghost" size="sm" onClick={logout}>
-              <LogOut className="h-4 w-4" />
+              <LogOut className="h-4 w-4 text-muted-foreground" />
             </Button>
           </div>
         </div>

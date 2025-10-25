@@ -166,7 +166,7 @@ export default function DiscoverPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50">
       <header className="border-b bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+        <div className="container mx-auto flex items-center justify-between px-4 py-4 text-muted-foreground">
           <Button asChild variant="ghost" size="sm">
             <Link href="/dashboard">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -205,7 +205,7 @@ export default function DiscoverPage() {
             {activePet && (
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">
-                  Buscando para <span className="font-semibold text-foreground">{activePet.name}</span>
+                  Buscando para <span className="font-semibold text-muted-foreground">{activePet.name}</span>
                 </p>
               </div>
             )}

@@ -168,6 +168,7 @@
     --color-red-600: #e40014;
     --color-yellow-50: #fefce8;
     --color-pink-50: #fdf2f8;
+    --color-gray-500: #6a7282;
     --color-black: #000;
     --color-white: #fff;
     --spacing: .25rem;
@@ -229,6 +230,7 @@
       --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-yellow-50: lab(98.6846% -1.79055 9.7766);
       --color-pink-50: lab(96.4459% 4.53997 -1.49434);
+      --color-gray-500: lab(47.7841% -.393182 -10.0268);
     }
   }
 }
@@ -2346,6 +2348,10 @@
   .text-foreground\/50 {
     color: #fafafa80;
     color: lab(98.272% -.0000596046 .0000238419 / .5);
+  }
+
+  .text-gray-500 {
+    color: var(--color-gray-500);
   }
 
   .text-muted-foreground {
