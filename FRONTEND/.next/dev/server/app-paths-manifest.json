@@ -5,5 +5,6 @@
   "/discover/page": "app/discover/page.js",
   "/login/page": "app/login/page.js",
   "/matches/page": "app/matches/page.js",
+  "/messages/[matchId]/page": "app/messages/[matchId]/page.js",
   "/page": "app/page.js"
 }

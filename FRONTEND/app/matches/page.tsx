@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { useRouter } from "next/navigation"
 import { api } from "@/lib/api"
@@ -29,8 +29,8 @@ interface Pet {
 
 interface Match {
   id: number
-  pet1: Pet
-  pet2: Pet
+  pet1_details: Pet
+  pet2_details: Pet
   created_at: string
 }
 
@@ -56,7 +56,7 @@ export default function MatchesPage() {
   const fetchData = async () => {
     try {
       const [matchesRes, petsRes] = await Promise.all([api.get("/matches/"), api.get("/pets/")])
-
+    
       setMatches(matchesRes.data)
       setUserPets(petsRes.data)
     } catch (error) {
@@ -67,14 +67,16 @@ export default function MatchesPage() {
   }
 
   const getOtherPet = (match: Match): Pet => {
+    console.log("aqui esta mi objeto Match jajajaj:", match.pet1_details)
+    console.log("aqui esta mi objeto Match completo:", userPets)
     const userPetIds = userPets.map((p) => p.id)
-    console.log("el objeto que se devuelve:", match.pet1)
-    return userPetIds.includes(match.pet1.id) ? match.pet2 : match.pet1
+    console.log("aqui estan los IDs de mis mascotas:", userPetIds)
+    return userPetIds.includes(match.pet1_details.id) ? match.pet2_details : match.pet1_details
   }
 
   const getMyPet = (match: Match): Pet => {
     const userPetIds = userPets.map((p) => p.id)
-    return userPetIds.includes(match.pet1.id) ? match.pet1 : match.pet2
+    return userPetIds.includes(match.pet1_details.id) ? match.pet1_details : match.pet2_details
   }
 
   if (authLoading || loading) {
