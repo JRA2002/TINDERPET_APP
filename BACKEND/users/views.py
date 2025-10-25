@@ -28,7 +28,7 @@ class LoginView(TokenObtainPairView):
     """
     permission_classes = [AllowAny]
     
-    @method_decorator(ratelimit(key='ip', rate='1000/h', method='POST'))
+    @method_decorator(ratelimit(key='ip', rate='10000/h', method='POST'))
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 

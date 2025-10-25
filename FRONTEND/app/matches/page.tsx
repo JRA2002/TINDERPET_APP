@@ -67,10 +67,7 @@ export default function MatchesPage() {
   }
 
   const getOtherPet = (match: Match): Pet => {
-    console.log("aqui esta mi objeto Match jajajaj:", match.pet1_details)
-    console.log("aqui esta mi objeto Match completo:", userPets)
     const userPetIds = userPets.map((p) => p.id)
-    console.log("aqui estan los IDs de mis mascotas:", userPetIds)
     return userPetIds.includes(match.pet1_details.id) ? match.pet2_details : match.pet1_details
   }
 
@@ -132,8 +129,6 @@ export default function MatchesPage() {
             {matches.map((match) => {
               const otherPet = getOtherPet(match)
               const myPet = getMyPet(match)
-              console.log("aqui esta mi objeto Match:", myPet)
-              console.log("aqui esta el obejto Match otro:", otherPet)
 
               return (
                 <Card key={match.id} className="overflow-hidden">

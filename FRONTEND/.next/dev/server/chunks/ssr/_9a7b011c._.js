@@ -302,10 +302,7 @@ function MatchesPage() {
         }
     };
     const getOtherPet = (match)=>{
-        console.log("aqui esta mi objeto Match jajajaj:", match.pet1_details);
-        console.log("aqui esta mi objeto Match completo:", userPets);
         const userPetIds = userPets.map((p)=>p.id);
-        console.log("aqui estan los IDs de mis mascotas:", userPetIds);
         return userPetIds.includes(match.pet1_details.id) ? match.pet2_details : match.pet1_details;
     };
     const getMyPet = (match)=>{
@@ -319,12 +316,12 @@ function MatchesPage() {
                 className: "h-8 w-8"
             }, void 0, false, {
                 fileName: "[project]/app/matches/page.tsx",
-                lineNumber: 85,
+                lineNumber: 82,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/matches/page.tsx",
-            lineNumber: 84,
+            lineNumber: 81,
             columnNumber: 7
         }, this);
     }
@@ -347,19 +344,19 @@ function MatchesPage() {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/matches/page.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 93,
                                         columnNumber: 15
                                     }, this),
                                     "Dashboard"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/matches/page.tsx",
-                                lineNumber: 95,
+                                lineNumber: 92,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/matches/page.tsx",
-                            lineNumber: 94,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -369,12 +366,12 @@ function MatchesPage() {
                                 children: "Matches"
                             }, void 0, false, {
                                 fileName: "[project]/app/matches/page.tsx",
-                                lineNumber: 101,
+                                lineNumber: 98,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/matches/page.tsx",
-                            lineNumber: 100,
+                            lineNumber: 97,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -386,23 +383,23 @@ function MatchesPage() {
                                 children: "Descubrir"
                             }, void 0, false, {
                                 fileName: "[project]/app/matches/page.tsx",
-                                lineNumber: 104,
+                                lineNumber: 101,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/matches/page.tsx",
-                            lineNumber: 103,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/matches/page.tsx",
-                    lineNumber: 93,
+                    lineNumber: 90,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/matches/page.tsx",
-                lineNumber: 92,
+                lineNumber: 89,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -416,7 +413,7 @@ function MatchesPage() {
                                 children: "Tus Matches"
                             }, void 0, false, {
                                 fileName: "[project]/app/matches/page.tsx",
-                                lineNumber: 111,
+                                lineNumber: 108,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -424,13 +421,13 @@ function MatchesPage() {
                                 children: "Mascotas que también les gustó tu perfil"
                             }, void 0, false, {
                                 fileName: "[project]/app/matches/page.tsx",
-                                lineNumber: 112,
+                                lineNumber: 109,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/matches/page.tsx",
-                        lineNumber: 110,
+                        lineNumber: 107,
                         columnNumber: 9
                     }, this),
                     matches.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -444,12 +441,12 @@ function MatchesPage() {
                                         className: "h-12 w-12 text-muted-foreground"
                                     }, void 0, false, {
                                         fileName: "[project]/app/matches/page.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 116,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/matches/page.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 115,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -457,7 +454,7 @@ function MatchesPage() {
                                     children: "No tienes matches aún"
                                 }, void 0, false, {
                                     fileName: "[project]/app/matches/page.tsx",
-                                    lineNumber: 121,
+                                    lineNumber: 118,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -465,7 +462,7 @@ function MatchesPage() {
                                     children: "Empieza a dar likes para encontrar tu primer match"
                                 }, void 0, false, {
                                     fileName: "[project]/app/matches/page.tsx",
-                                    lineNumber: 122,
+                                    lineNumber: 119,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -476,31 +473,29 @@ function MatchesPage() {
                                         children: "Descubrir Mascotas"
                                     }, void 0, false, {
                                         fileName: "[project]/app/matches/page.tsx",
-                                        lineNumber: 126,
+                                        lineNumber: 123,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/matches/page.tsx",
-                                    lineNumber: 125,
+                                    lineNumber: 122,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/matches/page.tsx",
-                            lineNumber: 117,
+                            lineNumber: 114,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/matches/page.tsx",
-                        lineNumber: 116,
+                        lineNumber: 113,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3",
                         children: matches.map((match)=>{
                             const otherPet = getOtherPet(match);
                             const myPet = getMyPet(match);
-                            console.log("aqui esta mi objeto Match:", myPet);
-                            console.log("aqui esta el obejto Match otro:", otherPet);
                             return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
                                 className: "overflow-hidden",
                                 children: [
@@ -513,7 +508,7 @@ function MatchesPage() {
                                                 className: "h-full w-full object-cover"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/matches/page.tsx",
-                                                lineNumber: 141,
+                                                lineNumber: 136,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -521,13 +516,13 @@ function MatchesPage() {
                                                 children: "Match"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/matches/page.tsx",
-                                                lineNumber: 146,
+                                                lineNumber: 141,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/matches/page.tsx",
-                                        lineNumber: 140,
+                                        lineNumber: 135,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardHeader"], {
@@ -541,7 +536,7 @@ function MatchesPage() {
                                                             children: otherPet.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/matches/page.tsx",
-                                                            lineNumber: 151,
+                                                            lineNumber: 146,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -555,7 +550,7 @@ function MatchesPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/matches/page.tsx",
-                                                            lineNumber: 152,
+                                                            lineNumber: 147,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -566,13 +561,13 @@ function MatchesPage() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/matches/page.tsx",
-                                                            lineNumber: 155,
+                                                            lineNumber: 150,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/matches/page.tsx",
-                                                    lineNumber: 150,
+                                                    lineNumber: 145,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Badge"], {
@@ -580,18 +575,18 @@ function MatchesPage() {
                                                     children: otherPet.gender === "male" ? "♂" : "♀"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/matches/page.tsx",
-                                                    lineNumber: 157,
+                                                    lineNumber: 152,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/matches/page.tsx",
-                                            lineNumber: 149,
+                                            lineNumber: 144,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/matches/page.tsx",
-                                        lineNumber: 148,
+                                        lineNumber: 143,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -601,7 +596,7 @@ function MatchesPage() {
                                                 children: otherPet.bio
                                             }, void 0, false, {
                                                 fileName: "[project]/app/matches/page.tsx",
-                                                lineNumber: 161,
+                                                lineNumber: 156,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -614,49 +609,49 @@ function MatchesPage() {
                                                             className: "mr-2 h-4 w-4"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/matches/page.tsx",
-                                                            lineNumber: 164,
+                                                            lineNumber: 159,
                                                             columnNumber: 25
                                                         }, this),
                                                         "Enviar Mensaje"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/matches/page.tsx",
-                                                    lineNumber: 163,
+                                                    lineNumber: 158,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/matches/page.tsx",
-                                                lineNumber: 162,
+                                                lineNumber: 157,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/matches/page.tsx",
-                                        lineNumber: 160,
+                                        lineNumber: 155,
                                         columnNumber: 19
                                     }, this)
                                 ]
                             }, match.id, true, {
                                 fileName: "[project]/app/matches/page.tsx",
-                                lineNumber: 139,
+                                lineNumber: 134,
                                 columnNumber: 17
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/app/matches/page.tsx",
-                        lineNumber: 131,
+                        lineNumber: 128,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/matches/page.tsx",
-                lineNumber: 109,
+                lineNumber: 106,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/matches/page.tsx",
-        lineNumber: 91,
+        lineNumber: 88,
         columnNumber: 5
     }, this);
 }

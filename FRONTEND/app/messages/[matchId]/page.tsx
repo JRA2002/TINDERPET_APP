@@ -99,7 +99,7 @@ export default function ChatPage() {
       const [matchesRes, petsRes] = await Promise.all([api.get("/matches/"), api.get("/pets/")])
 
       const currentMatch = matchesRes.data.find((m: Match) => m.id === Number(params.matchId))
-
+      console.log("aqui esta el match que quiero encontrar:", currentMatch)
       if (!currentMatch) {
         toast({
           title: "Match no encontrado",
@@ -112,11 +112,11 @@ export default function ChatPage() {
 
       setMatch(currentMatch)
       setUserPets(petsRes.data)
-
+      
       const userPetIds = petsRes.data.map((p: Pet) => p.id)
-      const myPetInMatch = userPetIds.includes(currentMatch.pet1.id) ? currentMatch.pet1 : currentMatch.pet2
-      const otherPetInMatch = userPetIds.includes(currentMatch.pet1.id) ? currentMatch.pet2 : currentMatch.pet1
-
+      const myPetInMatch = userPetIds.includes(currentMatch.pet1_details.id) ? currentMatch.pet1_details : currentMatch.pet2_details
+      const otherPetInMatch = userPetIds.includes(currentMatch.pet1_details.id) ? currentMatch.pet2_details : currentMatch.pet1_details
+     
       setMyPet(myPetInMatch)
       setOtherPet(otherPetInMatch)
 
@@ -153,11 +153,10 @@ export default function ChatPage() {
     setSending(true)
 
     try {
-      const response = await api.post(`/matches/${params.matchId}/messages/`, {
+      const response = await api.post(`/matches/${params.matchId}/messages/create/`, {
         sender_pet: myPet.id,
         content: newMessage.trim(),
       })
-
       setMessages([...messages, response.data])
       setNewMessage("")
     } catch (error: any) {
@@ -182,17 +181,17 @@ export default function ChatPage() {
   return (
     <div className="flex h-screen flex-col bg-gradient-to-br from-pink-50 via-white to-yellow-50">
       <header className="border-b bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto flex items-center gap-4 px-4 py-3">
+        <div className="container mx-auto flex items-center gap-4 px-4 py-3 text-gray-500">
           <Button asChild variant="ghost" size="sm">
             <Link href="/messages">
               <ArrowLeft className="h-4 w-4" />
             </Link>
           </Button>
           {otherPet && (
-            <div className="flex flex-1 items-center gap-3">
+            <div className="flex flex-1 items-center gap-3 text-gray-500">
               <Avatar className="h-10 w-10">
                 <AvatarImage src={otherPet.main_image || "/placeholder.svg"} alt={otherPet.name} />
-                <AvatarFallback>{otherPet.name[0]}</AvatarFallback>
+                <AvatarFallback>{otherPet.name}</AvatarFallback>
               </Avatar>
               <div>
                 <h2 className="font-semibold">{otherPet.name}</h2>
@@ -223,12 +222,12 @@ export default function ChatPage() {
                       className={cn(
                         "max-w-[70%] px-4 py-2",
                         isMyMessage
-                          ? "bg-gradient-to-r from-[#ff6b9d] to-[#ff4d85] text-white"
+                          ? "bg-gradient-to-r from-[#ff6b9d] to-[#ff4d85] text-black"
                           : "bg-white text-foreground",
                       )}
                     >
-                      <p className="break-words text-sm">{message.content}</p>
-                      <p className={cn("mt-1 text-xs", isMyMessage ? "text-white/70" : "text-muted-foreground")}>
+                      <p className="break-words text-sm text-black">{message.content}</p>
+                      <p className={cn("mt-1 text-xs", isMyMessage ? "text-white/70" : "text-gray-500")}>
                         {new Date(message.created_at).toLocaleTimeString("es-ES", {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -243,7 +242,7 @@ export default function ChatPage() {
           )}
         </div>
 
-        <div className="border-t bg-white/80 py-4 backdrop-blur-sm">
+        <div className="border-t bg-white/80 py-4 backdrop-blur-sm text-muted-foreground">
           <form onSubmit={handleSendMessage} className="flex gap-2">
             <Input
               value={newMessage}

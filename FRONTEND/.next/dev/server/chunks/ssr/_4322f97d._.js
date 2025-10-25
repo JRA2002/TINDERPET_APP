@@ -360,6 +360,7 @@ function ChatPage() {
                 __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["api"].get("/pets/")
             ]);
             const currentMatch = matchesRes.data.find((m)=>m.id === Number(params.matchId));
+            console.log("aqui esta el match que quiero encontrar:", currentMatch);
             if (!currentMatch) {
                 toast({
                     title: "Match no encontrado",
@@ -372,8 +373,8 @@ function ChatPage() {
             setMatch(currentMatch);
             setUserPets(petsRes.data);
             const userPetIds = petsRes.data.map((p)=>p.id);
-            const myPetInMatch = userPetIds.includes(currentMatch.pet1.id) ? currentMatch.pet1 : currentMatch.pet2;
-            const otherPetInMatch = userPetIds.includes(currentMatch.pet1.id) ? currentMatch.pet2 : currentMatch.pet1;
+            const myPetInMatch = userPetIds.includes(currentMatch.pet1_details.id) ? currentMatch.pet1_details : currentMatch.pet2_details;
+            const otherPetInMatch = userPetIds.includes(currentMatch.pet1_details.id) ? currentMatch.pet2_details : currentMatch.pet1_details;
             setMyPet(myPetInMatch);
             setOtherPet(otherPetInMatch);
             await fetchMessages();
@@ -403,7 +404,7 @@ function ChatPage() {
         if (!newMessage.trim() || !myPet || sending) return;
         setSending(true);
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["api"].post(`/matches/${params.matchId}/messages/`, {
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["api"].post(`/matches/${params.matchId}/messages/create/`, {
                 sender_pet: myPet.id,
                 content: newMessage.trim()
             });
@@ -429,12 +430,12 @@ function ChatPage() {
                 className: "h-8 w-8"
             }, void 0, false, {
                 fileName: "[project]/app/messages/[matchId]/page.tsx",
-                lineNumber: 177,
+                lineNumber: 176,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/messages/[matchId]/page.tsx",
-            lineNumber: 176,
+            lineNumber: 175,
             columnNumber: 7
         }, this);
     }
@@ -444,7 +445,7 @@ function ChatPage() {
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
                 className: "border-b bg-white/80 backdrop-blur-sm",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "container mx-auto flex items-center gap-4 px-4 py-3",
+                    className: "container mx-auto flex items-center gap-4 px-4 py-3 text-gray-500",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                             asChild: true,
@@ -456,21 +457,21 @@ function ChatPage() {
                                     className: "h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                    lineNumber: 188,
+                                    lineNumber: 187,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                lineNumber: 187,
+                                lineNumber: 186,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                            lineNumber: 186,
+                            lineNumber: 185,
                             columnNumber: 11
                         }, this),
                         otherPet && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-1 items-center gap-3",
+                            className: "flex flex-1 items-center gap-3 text-gray-500",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Avatar"], {
                                     className: "h-10 w-10",
@@ -480,20 +481,20 @@ function ChatPage() {
                                             alt: otherPet.name
                                         }, void 0, false, {
                                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                            lineNumber: 194,
+                                            lineNumber: 193,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$avatar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AvatarFallback"], {
-                                            children: otherPet.name[0]
+                                            children: otherPet.name
                                         }, void 0, false, {
                                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                            lineNumber: 195,
+                                            lineNumber: 194,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                    lineNumber: 193,
+                                    lineNumber: 192,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -503,7 +504,7 @@ function ChatPage() {
                                             children: otherPet.name
                                         }, void 0, false, {
                                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                            lineNumber: 198,
+                                            lineNumber: 197,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -511,30 +512,30 @@ function ChatPage() {
                                             children: otherPet.breed
                                         }, void 0, false, {
                                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                            lineNumber: 199,
+                                            lineNumber: 198,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                    lineNumber: 197,
+                                    lineNumber: 196,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                            lineNumber: 192,
+                            lineNumber: 191,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                    lineNumber: 185,
+                    lineNumber: 184,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/messages/[matchId]/page.tsx",
-                lineNumber: 184,
+                lineNumber: 183,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -552,7 +553,7 @@ function ChatPage() {
                                         children: "No hay mensajes aún"
                                     }, void 0, false, {
                                         fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                        lineNumber: 211,
+                                        lineNumber: 210,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -560,18 +561,18 @@ function ChatPage() {
                                         children: "Envía el primer mensaje para romper el hielo"
                                     }, void 0, false, {
                                         fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                        lineNumber: 212,
+                                        lineNumber: 211,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                lineNumber: 210,
+                                lineNumber: 209,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                            lineNumber: 209,
+                            lineNumber: 208,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "space-y-4",
@@ -581,36 +582,36 @@ function ChatPage() {
                                     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("flex", isMyMessage ? "justify-end" : "justify-start"),
                                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
-                                            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("max-w-[70%] px-4 py-2", isMyMessage ? "bg-gradient-to-r from-[#ff6b9d] to-[#ff4d85] text-white" : "bg-white text-foreground"),
+                                            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("max-w-[70%] px-4 py-2", isMyMessage ? "bg-gradient-to-r from-[#ff6b9d] to-[#ff4d85] text-black" : "bg-white text-foreground"),
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "break-words text-sm",
+                                                    className: "break-words text-sm text-black",
                                                     children: message.content
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                                    lineNumber: 230,
+                                                    lineNumber: 229,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("mt-1 text-xs", isMyMessage ? "text-white/70" : "text-muted-foreground"),
+                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cn"])("mt-1 text-xs", isMyMessage ? "text-white/70" : "text-gray-500"),
                                                     children: new Date(message.created_at).toLocaleTimeString("es-ES", {
                                                         hour: "2-digit",
                                                         minute: "2-digit"
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                                    lineNumber: 231,
+                                                    lineNumber: 230,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                            lineNumber: 222,
+                                            lineNumber: 221,
                                             columnNumber: 21
                                         }, this)
                                     }, message.id, false, {
                                         fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 220,
                                         columnNumber: 19
                                     }, this);
                                 }),
@@ -618,22 +619,22 @@ function ChatPage() {
                                     ref: messagesEndRef
                                 }, void 0, false, {
                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                    lineNumber: 241,
+                                    lineNumber: 240,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                            lineNumber: 216,
+                            lineNumber: 215,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/messages/[matchId]/page.tsx",
-                        lineNumber: 207,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "border-t bg-white/80 py-4 backdrop-blur-sm",
+                        className: "border-t bg-white/80 py-4 backdrop-blur-sm text-muted-foreground",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                             onSubmit: handleSendMessage,
                             className: "flex gap-2",
@@ -646,7 +647,7 @@ function ChatPage() {
                                     className: "flex-1"
                                 }, void 0, false, {
                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                    lineNumber: 248,
+                                    lineNumber: 247,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -657,35 +658,35 @@ function ChatPage() {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                        lineNumber: 256,
+                                        lineNumber: 255,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/messages/[matchId]/page.tsx",
-                                    lineNumber: 255,
+                                    lineNumber: 254,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/messages/[matchId]/page.tsx",
-                            lineNumber: 247,
+                            lineNumber: 246,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/messages/[matchId]/page.tsx",
-                        lineNumber: 246,
+                        lineNumber: 245,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/messages/[matchId]/page.tsx",
-                lineNumber: 206,
+                lineNumber: 205,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/messages/[matchId]/page.tsx",
-        lineNumber: 183,
+        lineNumber: 182,
         columnNumber: 5
     }, this);
 }

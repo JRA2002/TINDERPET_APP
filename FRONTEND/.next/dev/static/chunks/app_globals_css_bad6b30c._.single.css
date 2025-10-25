@@ -2247,6 +2247,20 @@
     color: #0a0a0a;
   }
 
+  .text-black {
+    color: var(--color-black);
+  }
+
+  .text-black\/70 {
+    color: #000000b3;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-black\/70 {
+      color: color-mix(in oklab, var(--color-black) 70%, transparent);
+    }
+  }
+
   .text-card-foreground {
     color: #fafafa;
   }
@@ -2340,6 +2354,10 @@
     .text-white\/90 {
       color: color-mix(in oklab, var(--color-white) 90%, transparent);
     }
+  }
+
+  .text-yellow-50 {
+    color: var(--color-yellow-50);
   }
 
   .tabular-nums {
