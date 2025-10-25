@@ -193,7 +193,7 @@ def discover_pets(request):
     Filters out: own pets, already liked, already passed, and already matched
     """
     pet_id = request.query_params.get('pet_id')
-    
+   
     if not pet_id:
         return Response(
             {'error': 'pet_id is required'}, 
@@ -202,6 +202,7 @@ def discover_pets(request):
     
     try:
         current_pet = Pet.objects.get(id=pet_id, owner=request.user)
+        print("Current pet:", current_pet)
     except Pet.DoesNotExist:
         return Response(
             {'error': 'Pet not found or you do not own this pet'}, 
@@ -222,7 +223,6 @@ def discover_pets(request):
     excluded_ids = list(liked_ids) + list(passed_ids) + matched_ids + [current_pet.id]
     
     pets = Pet.objects.filter(
-        breed=current_pet.breed,  # Same breed only
         pet_type=current_pet.pet_type,  # Same pet type
         is_active=True
     ).exclude(
@@ -280,7 +280,7 @@ def create_like(request):
             pet1=min(from_pet, to_pet, key=lambda p: p.id),
             pet2=max(from_pet, to_pet, key=lambda p: p.id)
         )
-    
+    print("Match object created:", match_obj)
     serializer = LikeSerializer(like)
     response_data = serializer.data
     
