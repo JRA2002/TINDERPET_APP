@@ -88,15 +88,15 @@ export default function NewPetPage() {
             "Content-Type": "multipart/form-data",
           },
         })
-        
         mainImageUrl = uploadResponse.data.url
+        console.log("Image uploaded to:", mainImageUrl) // Debugging line
         setUploadingImage(false)
       }
       
       await api.post("/pets/", {
         ...formData,
         age: Number.parseInt(formData.age),
-        main_image_url: mainImageUrl,
+        main_image: mainImageUrl,
       })
 
       toast({

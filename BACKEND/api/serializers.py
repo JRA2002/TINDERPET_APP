@@ -7,40 +7,28 @@ User = get_user_model()
 
 
 class PetImageSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
-    
     class Meta:
         model = PetImage
-        fields = ['id', 'image', 'image_url', 'uploaded_at']
+        fields = ['id', 'image', 'uploaded_at']
         read_only_fields = ['id', 'uploaded_at']
-    
-    def get_image_url(self, obj):
-        if obj.image:
-            return obj.image.url
-        return None
 
 class PetSerializer(serializers.ModelSerializer):
     images = PetImageSerializer(many=True, read_only=True)
-    main_image_url = serializers.SerializerMethodField()
     owner_email = serializers.EmailField(source='owner.email', read_only=True)
     
     class Meta:
         model = Pet
         fields = [
             'id', 'owner', 'owner_email', 'name', 'pet_type', 'breed', 
-            'age', 'gender', 'bio', 'main_image', 'main_image_url', 
+            'age', 'gender', 'bio', 'main_image', 
             'images', 'is_active', 'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'owner', 'created_at', 'updated_at']
-    
-    def get_main_image_url(self, obj):
-        if obj.main_image:
-            return obj.main_image.url
-        return None
 
 class PetCreateSerializer(serializers.ModelSerializer):
+    main_image = serializers.URLField(required=False, allow_blank=True)
     additional_images = serializers.ListField(
-        child=serializers.ImageField(),
+        child=serializers.URLField(),
         write_only=True,
         required=False
     )
@@ -54,11 +42,11 @@ class PetCreateSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         additional_images = validated_data.pop('additional_images', [])
+        
         pet = Pet.objects.create(**validated_data)
         
-        # Upload additional images
-        for image in additional_images:
-            PetImage.objects.create(pet=pet, image=image)
+        for image_url in additional_images:
+            PetImage.objects.create(pet=pet, image=image_url)
         
         return pet
 

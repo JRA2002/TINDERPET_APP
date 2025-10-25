@@ -44,6 +44,7 @@ export default function DashboardPage() {
   const fetchPets = async () => {
     try {
       const response = await api.get("/pets/")
+      console.log("Fetched pets:", response.data) // Debugging line
       setPets(response.data)
     } catch (error) {
       console.error("Error fetching pets:", error)

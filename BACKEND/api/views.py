@@ -6,6 +6,8 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+import cloudinary.uploader
 from .models import Pet, PetImage, Like, Match, Message, Pass
 from .serializers import (
     PetSerializer, PetCreateSerializer, LikeSerializer, 
@@ -18,6 +20,7 @@ User = get_user_model()
 # Pet Views
 class PetViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsPetOwner]
+    parser_classes = (JSONParser, MultiPartParser, FormParser)
     
     def get_serializer_class(self):
         if self.action == 'create':
@@ -36,7 +39,8 @@ class PetViewSet(viewsets.ModelViewSet):
         
         # Return full pet details
         pet = serializer.instance
-        response_serializer = PetSerializer(pet)
+        response_serializer = PetCreateSerializer(pet)
+        print("Created pet:", response_serializer.data)  # Debugging line
         return Response(response_serializer.data, status=status.HTTP_201_CREATED)
     
     @method_decorator(ratelimit(key='user', rate='100/h', method='PUT'))
@@ -66,6 +70,36 @@ class PetViewSet(viewsets.ModelViewSet):
         from .serializers import PetImageSerializer
         serializer = PetImageSerializer(images, many=True)
         return Response(serializer.data)
+    
+    @action(detail=False, methods=['post'], parser_classes=[MultiPartParser, FormParser])
+    @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
+    def upload_image(self, request):
+        """Upload an image to Cloudinary and return the URL"""
+        if 'image' not in request.FILES:
+            return Response(
+                {'error': 'No image file provided'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        image_file = request.FILES['image']
+        
+        try:
+            # Upload to Cloudinary
+            upload_result = cloudinary.uploader.upload(
+                image_file,
+                folder='tinderpet',
+                resource_type='image'
+            )
+            print("Upload result:", upload_result['url'])  # Debugging line
+            return Response({
+                'url': upload_result['secure_url'],
+                'public_id': upload_result['public_id']
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {'error': f'Failed to upload image: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 # Discover View
 @api_view(['GET'])

@@ -639,12 +639,13 @@ function NewPetPage() {
                     }
                 });
                 mainImageUrl = uploadResponse.data.url;
+                console.log("Image uploaded to:", mainImageUrl); // Debugging line
                 setUploadingImage(false);
             }
             await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].post("/pets/", {
                 ...formData,
                 age: Number.parseInt(formData.age),
-                main_image_url: mainImageUrl
+                main_image: mainImageUrl
             });
             toast({
                 title: "Mascota creada",
