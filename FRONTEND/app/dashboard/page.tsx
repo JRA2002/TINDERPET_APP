@@ -8,8 +8,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Spinner } from "@/components/ui/spinner"
-import { Plus, Edit, Heart, MessageCircle, LogOut } from "lucide-react"
+import { Plus, Edit, Heart, MessageCircle, LogOut, Check } from "lucide-react"
 import Link from "next/link"
+import { useToast } from "@/hooks/use-toast"
 
 interface Pet {
   id: number
@@ -26,8 +27,10 @@ interface Pet {
 export default function DashboardPage() {
   const { user, loading: authLoading, logout } = useAuth()
   const router = useRouter()
+  const { toast } = useToast()
   const [pets, setPets] = useState<Pet[]>([])
   const [loading, setLoading] = useState(true)
+  const [activePetId, setActivePetId] = useState<number | null>(null)
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -44,8 +47,10 @@ export default function DashboardPage() {
   const fetchPets = async () => {
     try {
       const response = await api.get("/pets/")
-      console.log("Fetched pets:", response.data) // Debugging line
       setPets(response.data)
+
+      const userResponse = await api.get("/auth/me/")
+      setActivePetId(userResponse.data.active_pet)
     } catch (error) {
       console.error("Error fetching pets:", error)
     } finally {
@@ -56,9 +61,19 @@ export default function DashboardPage() {
   const handleSetActive = async (petId: number) => {
     try {
       await api.post(`/pets/${petId}/set_active/`)
-      fetchPets()
+      setActivePetId(petId)
+
+      toast({
+        title: "Perfil activo cambiado",
+        description: "Ahora estás usando este perfil de mascota",
+      })
     } catch (error) {
       console.error("Error setting active pet:", error)
+      toast({
+        title: "Error",
+        description: "No se pudo cambiar el perfil activo",
+        variant: "destructive",
+      })
     }
   }
 
@@ -70,6 +85,8 @@ export default function DashboardPage() {
     )
   }
 
+  const activePet = pets.find((p) => p.id === activePetId)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50">
       <header className="border-b bg-white/80 backdrop-blur-sm">
@@ -80,6 +97,12 @@ export default function DashboardPage() {
             </span>
           </h1>
           <div className="flex items-center gap-4">
+            {activePet && (
+              <div className="hidden items-center gap-2 rounded-full bg-[#6bcf7f]/10 px-3 py-1 md:flex">
+                <Check className="h-4 w-4 text-[#6bcf7f]" />
+                <span className="text-sm font-medium">Activo: {activePet.name}</span>
+              </div>
+            )}
             <span className="text-sm text-muted-foreground">{user?.email}</span>
             <Button variant="ghost" size="sm" onClick={logout}>
               <LogOut className="h-4 w-4" />
@@ -92,7 +115,7 @@ export default function DashboardPage() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h2 className="text-3xl font-bold text-balance">Mis Mascotas</h2>
-            <p className="text-muted-foreground">Gestiona los perfiles de tus mascotas</p>
+            <p className="text-muted-foreground">Gestiona los perfiles de tus mascotas y elige cuál usar</p>
           </div>
           <Button asChild className="bg-[#ff6b9d] hover:bg-[#ff4d85]">
             <Link href="/dashboard/pets/new">
@@ -127,7 +150,12 @@ export default function DashboardPage() {
                     alt={pet.name}
                     className="h-full w-full object-cover"
                   />
-                  {pet.is_active && <Badge className="absolute right-2 top-2 bg-[#6bcf7f]">Activo</Badge>}
+                  {pet.id === activePetId && (
+                    <Badge className="absolute right-2 top-2 bg-[#6bcf7f]">
+                      <Check className="mr-1 h-3 w-3" />
+                      Activo
+                    </Badge>
+                  )}
                 </div>
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -149,16 +177,15 @@ export default function DashboardPage() {
                         Editar
                       </Link>
                     </Button>
-                    {!pet.is_active && (
+                    {pet.id !== activePetId ? (
                       <Button
                         size="sm"
                         className="flex-1 bg-[#ff6b9d] hover:bg-[#ff4d85]"
                         onClick={() => handleSetActive(pet.id)}
                       >
-                        Activar
+                        Usar Perfil
                       </Button>
-                    )}
-                    {pet.is_active && (
+                    ) : (
                       <Button asChild size="sm" className="flex-1 bg-[#6bcf7f] hover:bg-[#5ab86d]">
                         <Link href="/discover">
                           <Heart className="mr-2 h-4 w-4" />
@@ -208,3 +235,4 @@ export default function DashboardPage() {
     </div>
   )
 }
+

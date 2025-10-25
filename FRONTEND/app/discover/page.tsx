@@ -60,24 +60,31 @@ export default function DiscoverPage() {
 
   const fetchActivePet = async () => {
     try {
-      const response = await api.get("/pets/")
-      const userPets = response.data
-      const active = userPets.find((p: Pet) => p.is_active)
+      const userResponse = await api.get("/auth/me/")
+      const activePetId = userResponse.data.active_pet
 
-      if (!active) {
+      if (!activePetId) {
         toast({
           title: "No hay mascota activa",
-          description: "Por favor activa una mascota desde el dashboard",
+          description: "Por favor selecciona una mascota activa desde el dashboard",
           variant: "destructive",
         })
         router.push("/dashboard")
         return
       }
 
-      setActivePet(active)
-      fetchDiscoverPets(active.id)
+      // Get the active pet details
+      const petResponse = await api.get(`/pets/${activePetId}/`)
+      setActivePet(petResponse.data)
+      fetchDiscoverPets(activePetId)
     } catch (error) {
       console.error("Error fetching active pet:", error)
+      toast({
+        title: "Error",
+        description: "No se pudo cargar la mascota activa",
+        variant: "destructive",
+      })
+      router.push("/dashboard")
       setLoading(false)
     }
   }
@@ -105,7 +112,6 @@ export default function DiscoverPage() {
         to_pet: currentPet.id,
       })
 
-      // Check if it's a match
       if (response.data.match) {
         setMatchDialog({ open: true, match: response.data.match })
       }
@@ -255,7 +261,6 @@ export default function DiscoverPage() {
         )}
       </main>
 
-      {/* Match Dialog */}
       <Dialog open={matchDialog.open} onOpenChange={(open) => setMatchDialog({ ...matchDialog, open })}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>

@@ -12,19 +12,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowLeft, Upload, X } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
-import Image from "next/image"
 
 export default function NewPetPage() {
   const router = useRouter()
   const { user } = useAuth()
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
-  const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imagePreview, setImagePreview] = useState<string>("")
-  const [uploadingImage, setUploadingImage] = useState(false)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -35,76 +31,22 @@ export default function NewPetPage() {
     bio: "",
   })
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      if (!file.type.startsWith("image/")) {
-        toast({
-          title: "Error",
-          description: "Por favor selecciona un archivo de imagen válido",
-          variant: "destructive",
-        })
-        return
-      }
-
-      if (file.size > 5 * 1024 * 1024) {
-        toast({
-          title: "Error",
-          description: "La imagen no debe superar los 5MB",
-          variant: "destructive",
-        })
-        return
-      }
-
-      setImageFile(file)
-
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
-  const handleRemoveImage = () => {
-    setImageFile(null)
-    setImagePreview("")
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      let mainImageUrl = ""
-
-      if (imageFile) {
-        setUploadingImage(true)
-        const formData = new FormData()
-        formData.append("image", imageFile)
-       
-        const uploadResponse = await api.post("/pets/upload_image/", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        mainImageUrl = uploadResponse.data.url
-        console.log("Image uploaded to:", mainImageUrl) // Debugging line
-        setUploadingImage(false)
-      }
-      
-      await api.post("/pets/", {
+      const response = await api.post("/pets/", {
         ...formData,
         age: Number.parseInt(formData.age),
-        main_image: mainImageUrl,
       })
 
       toast({
         title: "Mascota creada",
-        description: "El perfil de tu mascota ha sido creado exitosamente",
+        description: "Ahora puedes agregar fotos a tu mascota",
       })
 
-      router.push("/dashboard")
+      router.push(`/dashboard/pets/${response.data.id}/edit`)
     } catch (error: any) {
       toast({
         title: "Error",
@@ -113,7 +55,6 @@ export default function NewPetPage() {
       })
     } finally {
       setLoading(false)
-      setUploadingImage(false)
     }
   }
 
@@ -134,7 +75,7 @@ export default function NewPetPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">Crear Perfil de Mascota</CardTitle>
-            <CardDescription>Completa la información de tu mascota para empezar a buscar matches</CardDescription>
+            <CardDescription>Completa la información básica. Podrás agregar fotos después.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -229,57 +170,12 @@ export default function NewPetPage() {
                 <p className="text-xs text-muted-foreground">{formData.bio.length}/500 caracteres</p>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="main_image">Imagen Principal</Label>
-                {!imagePreview ? (
-                  <div className="flex items-center gap-4">
-                    <Input
-                      id="main_image"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="hidden"
-                    />
-                    <Label
-                      htmlFor="main_image"
-                      className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed border-muted-foreground/25 bg-background px-6 py-8 text-center transition-colors hover:border-muted-foreground/50 hover:bg-muted/50"
-                    >
-                      <Upload className="h-8 w-8 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium">Haz clic para subir una imagen</p>
-                        <p className="text-xs text-muted-foreground">PNG, JPG, GIF hasta 5MB</p>
-                      </div>
-                    </Label>
-                  </div>
-                ) : (
-                  <div className="relative">
-                    <div className="relative aspect-square w-full max-w-xs overflow-hidden rounded-lg border">
-                      <Image src={imagePreview || "/placeholder.svg"} alt="Preview" fill className="object-cover" />
-                    </div>
-                    <Button
-                      type="button"
-                      variant="destructive"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      onClick={handleRemoveImage}
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                <p className="text-xs text-muted-foreground">Esta será la imagen principal del perfil de tu mascota</p>
-              </div>
-
               <div className="flex gap-4">
                 <Button type="button" variant="outline" className="flex-1 bg-transparent" onClick={() => router.back()}>
                   Cancelar
                 </Button>
-                <Button
-                  type="submit"
-                  className="flex-1 bg-[#ff6b9d] hover:bg-[#ff4d85]"
-                  disabled={loading || uploadingImage}
-                >
-                  {uploadingImage ? "Subiendo imagen..." : loading ? "Creando..." : "Crear Mascota"}
+                <Button type="submit" className="flex-1 bg-[#ff6b9d] hover:bg-[#ff4d85]" disabled={loading}>
+                  {loading ? "Creando..." : "Crear y Agregar Fotos"}
                 </Button>
               </div>
             </form>

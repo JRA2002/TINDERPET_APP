@@ -11,7 +11,7 @@ import cloudinary.uploader
 from .models import Pet, PetImage, Like, Match, Message, Pass
 from .serializers import (
     PetSerializer, PetCreateSerializer, LikeSerializer, 
-    MatchSerializer, MessageSerializer, PassSerializer
+    MatchSerializer, MessageSerializer, PassSerializer, PetImageSerializer
 )
 from .permissions import IsOwnerOrReadOnly, IsPetOwner
 
@@ -28,7 +28,6 @@ class PetViewSet(viewsets.ModelViewSet):
         return PetSerializer
     
     def get_queryset(self):
-        # Users can only see their own pets
         return Pet.objects.filter(owner=self.request.user)
     
     @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
@@ -37,10 +36,8 @@ class PetViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save(owner=request.user)
         
-        # Return full pet details
         pet = serializer.instance
-        response_serializer = PetCreateSerializer(pet)
-        print("Created pet:", response_serializer.data)  # Debugging line
+        response_serializer = PetSerializer(pet)
         return Response(response_serializer.data, status=status.HTTP_201_CREATED)
     
     @method_decorator(ratelimit(key='user', rate='100/h', method='PUT'))
@@ -49,15 +46,12 @@ class PetViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['post'])
     def set_active(self, request, pk=None):
-        """Set this pet as the active profile"""
+        """Set this pet as the active profile for the user"""
         pet = self.get_object()
         
-        # Deactivate all other pets for this user
-        Pet.objects.filter(owner=request.user).update(is_active=False)
-        
-        # Activate this pet
-        pet.is_active = True
-        pet.save()
+        user = request.user
+        user.active_pet = pet
+        user.save()
         
         serializer = self.get_serializer(pet)
         return Response(serializer.data)
@@ -67,9 +61,98 @@ class PetViewSet(viewsets.ModelViewSet):
         """Get all images for a pet"""
         pet = self.get_object()
         images = pet.images.all()
-        from .serializers import PetImageSerializer
         serializer = PetImageSerializer(images, many=True)
         return Response(serializer.data)
+    
+    @action(detail=True, methods=['post'], parser_classes=[MultiPartParser, FormParser])
+    @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
+    def add_image(self, request, pk=None):
+        """Upload and add an image to a pet"""
+        pet = self.get_object()
+        
+        if 'image' not in request.FILES:
+            return Response(
+                {'error': 'No image file provided'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        image_file = request.FILES['image']
+        
+        try:
+            upload_result = cloudinary.uploader.upload(
+                image_file,
+                folder='tinderpet',
+                resource_type='image'
+            )
+            
+            pet_image = PetImage.objects.create(
+                pet=pet,
+                image=upload_result['secure_url']
+            )
+            
+            serializer = PetImageSerializer(pet_image)
+            print(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(
+                {'error': f'Failed to upload image: {str(e)}'}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
+    @action(detail=True, methods=['post'])
+    def set_main_image(self, request, pk=None):
+        """Set a specific image as the main image"""
+        pet = self.get_object()
+        image_id = request.data.get('image_id')
+        
+        if not image_id:
+            return Response(
+                {'error': 'image_id is required'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            pet_image = PetImage.objects.get(id=image_id, pet=pet)
+            pet.main_image = pet_image.image
+            pet.save()
+            
+            serializer = self.get_serializer(pet)
+            return Response(serializer.data)
+        except PetImage.DoesNotExist:
+            return Response(
+                {'error': 'Image not found'}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
+    
+    @action(detail=True, methods=['delete'])
+    def delete_image(self, request, pk=None):
+        """Delete a specific image from a pet"""
+        pet = self.get_object()
+        image_id = request.data.get('image_id')
+        
+        if not image_id:
+            return Response(
+                {'error': 'image_id is required'}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            pet_image = PetImage.objects.get(id=image_id, pet=pet)
+            
+            # Don't allow deleting if it's the main image
+            if pet.main_image == pet_image.image:
+                return Response(
+                    {'error': 'Cannot delete the main image. Set another image as main first.'}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            pet_image.delete()
+            return Response({'status': 'Image deleted successfully'})
+        except PetImage.DoesNotExist:
+            return Response(
+                {'error': 'Image not found'}, 
+                status=status.HTTP_404_NOT_FOUND
+            )
     
     @action(detail=False, methods=['post'], parser_classes=[MultiPartParser, FormParser])
     @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
@@ -84,13 +167,12 @@ class PetViewSet(viewsets.ModelViewSet):
         image_file = request.FILES['image']
         
         try:
-            # Upload to Cloudinary
             upload_result = cloudinary.uploader.upload(
                 image_file,
                 folder='tinderpet',
                 resource_type='image'
             )
-            print("Upload result:", upload_result['url'])  # Debugging line
+            
             return Response({
                 'url': upload_result['secure_url'],
                 'public_id': upload_result['public_id']
