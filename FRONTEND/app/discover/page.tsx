@@ -8,10 +8,16 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Spinner } from "@/components/ui/spinner"
-import { Heart, X, ArrowLeft, Sparkles } from "lucide-react"
+import { Heart, X, ArrowLeft, Sparkles, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+
+interface PetImage {
+  id: number
+  image: string
+  uploaded_at: string
+}
 
 interface Pet {
   id: number
@@ -23,6 +29,7 @@ interface Pet {
   bio: string
   main_image: string
   is_active: boolean
+  images: PetImage[]
 }
 
 interface Match {
@@ -39,6 +46,7 @@ export default function DiscoverPage() {
   const [activePet, setActivePet] = useState<Pet | null>(null)
   const [pets, setPets] = useState<Pet[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState(false)
   const [matchDialog, setMatchDialog] = useState<{ open: boolean; match: Match | null }>({
@@ -73,7 +81,6 @@ export default function DiscoverPage() {
         return
       }
 
-      // Get the active pet details
       const petResponse = await api.get(`/pets/${activePetId}/`)
       setActivePet(petResponse.data)
       fetchDiscoverPets(activePetId)
@@ -92,6 +99,7 @@ export default function DiscoverPage() {
   const fetchDiscoverPets = async (petId: number) => {
     try {
       const response = await api.get(`/discover/?pet_id=${petId}`)
+      console.log("[v0] Discover pets response:", response.data)
       setPets(response.data)
     } catch (error) {
       console.error("Error fetching discover pets:", error)
@@ -117,6 +125,7 @@ export default function DiscoverPage() {
       }
 
       setCurrentIndex(currentIndex + 1)
+      setCurrentPhotoIndex(0)
     } catch (error: any) {
       toast({
         title: "Error",
@@ -141,6 +150,7 @@ export default function DiscoverPage() {
       })
 
       setCurrentIndex(currentIndex + 1)
+      setCurrentPhotoIndex(0)
     } catch (error: any) {
       toast({
         title: "Error",
@@ -150,6 +160,43 @@ export default function DiscoverPage() {
     } finally {
       setActionLoading(false)
     }
+  }
+
+  const handlePreviousPhoto = () => {
+    console.log("[v0] Previous photo clicked, current index:", currentPhotoIndex)
+    if (currentPhotoIndex > 0) {
+      setCurrentPhotoIndex(currentPhotoIndex - 1)
+    }
+  }
+
+  const handleNextPhoto = () => {
+    const totalPhotos = getCurrentPetPhotos().length
+    console.log("[v0] Next photo clicked, current index:", currentPhotoIndex, "total photos:", totalPhotos)
+    if (currentPhotoIndex < totalPhotos - 1) {
+      setCurrentPhotoIndex(currentPhotoIndex + 1)
+    }
+  }
+
+  const getCurrentPetPhotos = () => {
+    const currentPet = pets[currentIndex]
+    if (!currentPet) return []
+
+    const photos = []
+
+    if (currentPet.main_image) {
+      photos.push(currentPet.main_image)
+    }
+
+    if (currentPet.images && currentPet.images.length > 0) {
+      currentPet.images.forEach((img) => {
+        if (img.image !== currentPet.main_image) {
+          photos.push(img.image)
+        }
+      })
+    }
+
+    console.log("[v0] Current pet photos:", photos)
+    return photos
   }
 
   if (authLoading || loading) {
@@ -162,6 +209,17 @@ export default function DiscoverPage() {
 
   const currentPet = pets[currentIndex]
   const hasMorePets = currentIndex < pets.length
+  const currentPetPhotos = hasMorePets ? getCurrentPetPhotos() : []
+  const totalPhotos = currentPetPhotos.length
+  const currentPhoto = currentPetPhotos[currentPhotoIndex] || "/placeholder.svg?height=600&width=450"
+
+  console.log("[v0] Render state:", {
+    currentIndex,
+    currentPhotoIndex,
+    totalPhotos,
+    hasMorePets,
+    currentPet: currentPet?.name,
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50">
@@ -205,7 +263,7 @@ export default function DiscoverPage() {
             {activePet && (
               <div className="text-center">
                 <p className="text-sm text-muted-foreground">
-                  Buscando para <span className="font-semibold text-muted-foreground">{activePet.name}</span>
+                  Buscando para <span className="font-semibold text-black">{activePet.name}</span>
                 </p>
               </div>
             )}
@@ -213,12 +271,57 @@ export default function DiscoverPage() {
             <Card className="overflow-hidden shadow-xl">
               <div className="relative aspect-[3/4]">
                 <img
-                  src={currentPet.main_image || "/placeholder.svg?height=600&width=450"}
-                  alt={currentPet.name}
+                  src={currentPhoto || "/placeholder.svg"}
+                  alt={`${currentPet.name} - Foto ${currentPhotoIndex + 1}`}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+
+                {totalPhotos > 1 && (
+                  <>
+                    <div className="absolute top-4 left-0 right-0 z-20 flex justify-center gap-1.5 px-4">
+                      {currentPetPhotos.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`h-1 flex-1 rounded-full transition-all ${
+                            index === currentPhotoIndex ? "bg-white" : "bg-white/40"
+                          }`}
+                        />
+                      ))}
+                    </div>
+
+                    {currentPhotoIndex > 0 && (
+                      <button
+                        type="button"
+                        className="absolute left-2 top-1/2 z-30 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all hover:bg-black/70 hover:scale-110"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handlePreviousPhoto()
+                        }}
+                      >
+                        <ChevronLeft className="h-6 w-6" />
+                      </button>
+                    )}
+
+                    {currentPhotoIndex < totalPhotos - 1 && (
+                      <button
+                        type="button"
+                        className="absolute right-2 top-1/2 z-30 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-all hover:bg-black/70 hover:scale-110"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          handleNextPhoto()
+                        }}
+                      >
+                        <ChevronRight className="h-6 w-6" />
+                      </button>
+                    )}
+                  </>
+                )}
+
+                <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-6 text-white">
                   <div className="mb-2 flex items-center gap-2">
                     <h2 className="text-3xl font-bold">{currentPet.name}</h2>
                     <Badge variant="secondary" className="bg-white/20 text-white backdrop-blur-sm">
@@ -227,6 +330,11 @@ export default function DiscoverPage() {
                   </div>
                   <p className="mb-2 text-lg font-medium">{currentPet.breed}</p>
                   <p className="line-clamp-3 text-sm text-white/90">{currentPet.bio}</p>
+                  {totalPhotos > 1 && (
+                    <p className="mt-2 text-xs text-white/70">
+                      Foto {currentPhotoIndex + 1} de {totalPhotos}
+                    </p>
+                  )}
                 </div>
               </div>
             </Card>

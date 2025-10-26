@@ -36,7 +36,6 @@ export default function RegisterPage() {
 
     try {
       await register(email, username, password, password_confirm)
-      console.log("Registro aquii", email, username) // Debugging line
       toast({
         title: "Cuenta creada",
         description: "Tu cuenta ha sido creada exitosamente",
