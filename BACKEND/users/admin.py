@@ -7,7 +7,6 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    """Custom admin for User model"""
     list_display = ['email', 'username', 'is_staff', 'is_active', 'created_at']
     list_filter = ['is_staff', 'is_active', 'created_at']
     search_fields = ['email', 'username']

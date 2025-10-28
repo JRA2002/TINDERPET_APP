@@ -26,7 +26,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  // Load user from localStorage on mount
   useEffect(() => {
     const loadUser = async () => {
       if (typeof window === "undefined") {
@@ -40,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const response = await api.get("/auth/me/")
           setUser(response.data)
         } catch (error) {
-          // Token might be expired, try to refresh
+       
           await refreshToken()
         }
       }
@@ -49,14 +48,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loadUser()
   }, [])
 
-  // Auto-refresh token before it expires
   useEffect(() => {
     const interval = setInterval(
       () => {
         refreshToken()
       },
       50 * 60 * 1000,
-    ) // Refresh every 50 minutes (token expires in 1 hour)
+    )
 
     return () => clearInterval(interval)
   }, [])
@@ -84,7 +82,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password_confirm,
     })
 
-    // Auto-login after registration
     await login(email, password)
   }
 
@@ -109,11 +106,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       localStorage.setItem("access_token", access)
 
-      // Update user data
       const userResponse = await api.get("/auth/me/")
       setUser(userResponse.data)
     } catch (error) {
-      // Refresh token is invalid, logout
       logout()
     }
   }

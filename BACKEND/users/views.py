@@ -9,38 +9,29 @@ from .serializers import UserSerializer, RegisterSerializer
 
 
 class RegisterView(generics.CreateAPIView):
-    """
-    API endpoint for user registration
-    Rate limited to 5 registrations per hour per IP
-    """
     permission_classes = [AllowAny]
     serializer_class = RegisterSerializer
     
-    @method_decorator(ratelimit(key='ip', rate='5000/h', method='POST'))
+    @method_decorator(ratelimit(key='ip', rate='100/h', method='POST'))
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
 
 class LoginView(TokenObtainPairView):
-    """
-    API endpoint for user login (JWT token generation)
-    Rate limited to 10 login attempts per hour per IP
-    """
+ 
     permission_classes = [AllowAny]
     
-    @method_decorator(ratelimit(key='ip', rate='10000/h', method='POST'))
+    @method_decorator(ratelimit(key='ip', rate='100/h', method='POST'))
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
 
 
 class RefreshTokenView(TokenRefreshView):
-    """API endpoint for refreshing JWT tokens"""
     permission_classes = [AllowAny]
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def current_user(request):
-    """Get current authenticated user details"""
     serializer = UserSerializer(request.user)
     return Response(serializer.data)

@@ -9,7 +9,6 @@ export const api = axios.create({
   },
 })
 
-// Add token to requests
 api.interceptors.request.use(
   (config) => {
     if (typeof window !== "undefined") {
@@ -25,7 +24,6 @@ api.interceptors.request.use(
   },
 )
 
-// Handle 401 errors
 api.interceptors.response.use(
   (response) => response,
   async (error) => {

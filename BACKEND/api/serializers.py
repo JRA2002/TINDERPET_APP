@@ -5,7 +5,6 @@ import cloudinary.uploader
 
 User = get_user_model()
 
-
 class PetImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PetImage

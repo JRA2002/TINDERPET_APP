@@ -17,7 +17,6 @@ from .permissions import IsOwnerOrReadOnly, IsPetOwner
 
 User = get_user_model()
 
-# Pet Views
 class PetViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsPetOwner]
     parser_classes = (JSONParser, MultiPartParser, FormParser)
@@ -40,13 +39,13 @@ class PetViewSet(viewsets.ModelViewSet):
         response_serializer = PetSerializer(pet)
         return Response(response_serializer.data, status=status.HTTP_201_CREATED)
     
-    @method_decorator(ratelimit(key='user', rate='100/h', method='PUT'))
+    @method_decorator(ratelimit(key='user', rate='50/h', method='PUT'))
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
     
     @action(detail=True, methods=['post'])
     def set_active(self, request, pk=None):
-        """Set this pet as the active profile for the user"""
+       
         pet = self.get_object()
         
         user = request.user
@@ -58,7 +57,7 @@ class PetViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['get'])
     def images(self, request, pk=None):
-        """Get all images for a pet"""
+        
         pet = self.get_object()
         images = pet.images.all()
         serializer = PetImageSerializer(images, many=True)
@@ -67,7 +66,7 @@ class PetViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'], parser_classes=[MultiPartParser, FormParser])
     @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
     def add_image(self, request, pk=None):
-        """Upload and add an image to a pet"""
+       
         pet = self.get_object()
         
         if 'image' not in request.FILES:
@@ -101,7 +100,7 @@ class PetViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['post'])
     def set_main_image(self, request, pk=None):
-        """Set a specific image as the main image"""
+   
         pet = self.get_object()
         image_id = request.data.get('image_id')
         
@@ -126,7 +125,7 @@ class PetViewSet(viewsets.ModelViewSet):
     
     @action(detail=True, methods=['delete'])
     def delete_image(self, request, pk=None):
-        """Delete a specific image from a pet"""
+    
         pet = self.get_object()
         image_id = request.data.get('image_id')
         
@@ -139,7 +138,6 @@ class PetViewSet(viewsets.ModelViewSet):
         try:
             pet_image = PetImage.objects.get(id=image_id, pet=pet)
             
-            # Don't allow deleting if it's the main image
             if pet.main_image == pet_image.image:
                 return Response(
                     {'error': 'Cannot delete the main image. Set another image as main first.'}, 
@@ -157,7 +155,7 @@ class PetViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'], parser_classes=[MultiPartParser, FormParser])
     @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
     def upload_image(self, request):
-        """Upload an image to Cloudinary and return the URL"""
+
         if 'image' not in request.FILES:
             return Response(
                 {'error': 'No image file provided'}, 
@@ -183,15 +181,11 @@ class PetViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
-# Discover View
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 @ratelimit(key='user', rate='200/h', method='GET')
 def discover_pets(request):
-    """
-    Get pets to discover based on the active pet's breed
-    Filters out: own pets, already liked, already passed, and already matched
-    """
+
     pet_id = request.query_params.get('pet_id')
    
     if not pet_id:
@@ -209,39 +203,33 @@ def discover_pets(request):
             status=status.HTTP_404_NOT_FOUND
         )
     
-    # Get IDs of pets already interacted with
     liked_ids = Like.objects.filter(from_pet=current_pet).values_list('to_pet_id', flat=True)
     passed_ids = Pass.objects.filter(from_pet=current_pet).values_list('to_pet_id', flat=True)
     
-    # Get matched pet IDs
     matched_ids = []
     matches = Match.objects.filter(Q(pet1=current_pet) | Q(pet2=current_pet))
     for match in matches:
         matched_ids.append(match.pet1.id if match.pet2 == current_pet else match.pet2.id)
-    
-    # Exclude own pets, same breed only, and already interacted pets
+
     excluded_ids = list(liked_ids) + list(passed_ids) + matched_ids + [current_pet.id]
     
     pets = Pet.objects.filter(
-        pet_type=current_pet.pet_type,  # Same pet type
+        pet_type=current_pet.pet_type,
         is_active=True
     ).exclude(
         id__in=excluded_ids
     ).exclude(
-        owner=request.user  # Exclude own pets
-    ).order_by('?')[:20]  # Random order, limit 20
+        owner=request.user 
+    ).order_by('?')[:20]
     
     serializer = PetSerializer(pets, many=True)
     return Response(serializer.data)
 
-# Like Views
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @ratelimit(key='user', rate='100/h', method='POST')
 def create_like(request):
-    """
-    Create a like and check for match
-    """
+  
     from_pet_id = request.data.get('from_pet')
     to_pet_id = request.data.get('to_pet')
     
@@ -260,22 +248,19 @@ def create_like(request):
             status=status.HTTP_404_NOT_FOUND
         )
     
-    # Check if like already exists
     if Like.objects.filter(from_pet=from_pet, to_pet=to_pet).exists():
         return Response(
             {'error': 'Like already exists'}, 
             status=status.HTTP_400_BAD_REQUEST
         )
     
-    # Create like
     like = Like.objects.create(from_pet=from_pet, to_pet=to_pet)
     
-    # Check for match
     is_match = like.is_match()
     match_obj = None
     
     if is_match:
-        # Create match if it doesn't exist
+        
         match_obj, created = Match.objects.get_or_create(
             pet1=min(from_pet, to_pet, key=lambda p: p.id),
             pet2=max(from_pet, to_pet, key=lambda p: p.id)
@@ -289,14 +274,11 @@ def create_like(request):
     
     return Response(response_data, status=status.HTTP_201_CREATED)
 
-# Pass Views
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @ratelimit(key='user', rate='200/h', method='POST')
 def create_pass(request):
-    """
-    Pass on a pet (swipe left)
-    """
+
     from_pet_id = request.data.get('from_pet')
     to_pet_id = request.data.get('to_pet')
     
@@ -315,7 +297,6 @@ def create_pass(request):
             status=status.HTTP_404_NOT_FOUND
         )
     
-    # Create pass if it doesn't exist
     pass_obj, created = Pass.objects.get_or_create(from_pet=from_pet, to_pet=to_pet)
     
     serializer = PassSerializer(pass_obj)
@@ -325,9 +306,7 @@ def create_pass(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_matches(request):
-    """
-    List all matches for the user's pets
-    """
+
     user_pets = Pet.objects.filter(owner=request.user)
     
     matches = Match.objects.filter(
@@ -337,13 +316,10 @@ def list_matches(request):
     serializer = MatchSerializer(matches, many=True)
     return Response(serializer.data)
 
-# Message Views
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_messages(request, match_id):
-    """
-    List all messages for a match
-    """
+
     try:
         match = Match.objects.get(id=match_id)
     except Match.DoesNotExist:
@@ -352,7 +328,6 @@ def list_messages(request, match_id):
             status=status.HTTP_404_NOT_FOUND
         )
     
-    # Verify user owns one of the pets in the match
     if match.pet1.owner != request.user and match.pet2.owner != request.user:
         return Response(
             {'error': 'You do not have permission to view these messages'}, 
@@ -367,9 +342,7 @@ def list_messages(request, match_id):
 @permission_classes([IsAuthenticated])
 @ratelimit(key='user', rate='500/h', method='POST')
 def create_message(request, match_id):
-    """
-    Send a message in a match
-    """
+
     try:
         match = Match.objects.get(id=match_id)
     except Match.DoesNotExist:
@@ -395,7 +368,6 @@ def create_message(request, match_id):
             status=status.HTTP_404_NOT_FOUND
         )
     
-    # Verify sender pet is part of the match
     if sender_pet not in [match.pet1, match.pet2]:
         return Response(
             {'error': 'This pet is not part of this match'}, 
@@ -414,9 +386,7 @@ def create_message(request, match_id):
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def mark_messages_read(request, match_id):
-    """
-    Mark all messages in a match as read for the current user
-    """
+
     try:
         match = Match.objects.get(id=match_id)
     except Match.DoesNotExist:
@@ -425,10 +395,8 @@ def mark_messages_read(request, match_id):
             status=status.HTTP_404_NOT_FOUND
         )
     
-    # Get the user's pet in this match
     user_pet = match.pet1 if match.pet1.owner == request.user else match.pet2
     
-    # Mark all messages from the other pet as read
     other_pet = match.pet2 if user_pet == match.pet1 else match.pet1
     
     Message.objects.filter(
