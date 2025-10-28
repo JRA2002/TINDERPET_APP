@@ -105,7 +105,6 @@ const api = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axio
         "Content-Type": "application/json"
     }
 });
-// Add token to requests
 api.interceptors.request.use((config)=>{
     if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
     ;
@@ -113,7 +112,6 @@ api.interceptors.request.use((config)=>{
 }, (error)=>{
     return Promise.reject(error);
 });
-// Handle 401 errors
 api.interceptors.response.use((response)=>response, async (error)=>{
     const originalRequest = error.config;
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -147,7 +145,6 @@ function AuthProvider({ children }) {
     const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(true);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
-    // Load user from localStorage on mount
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const loadUser = async ()=>{
             if ("TURBOPACK compile-time truthy", 1) {
@@ -160,12 +157,10 @@ function AuthProvider({ children }) {
         };
         loadUser();
     }, []);
-    // Auto-refresh token before it expires
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const interval = setInterval(()=>{
             refreshToken();
-        }, 50 * 60 * 1000) // Refresh every 50 minutes (token expires in 1 hour)
-        ;
+        }, 50 * 60 * 1000);
         return ()=>clearInterval(interval);
     }, []);
     const login = async (email, password)=>{
@@ -187,7 +182,6 @@ function AuthProvider({ children }) {
             password,
             password_confirm
         });
-        // Auto-login after registration
         await login(email, password);
     };
     const logout = ()=>{
@@ -213,7 +207,7 @@ function AuthProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/lib/auth-context.tsx",
-        lineNumber: 122,
+        lineNumber: 117,
         columnNumber: 5
     }, this);
 }
@@ -287,8 +281,6 @@ const reducer = (state, action)=>{
         case 'DISMISS_TOAST':
             {
                 const { toastId } = action;
-                // ! Side effects ! - This could be extracted into a dismissToast() action,
-                // but I'll keep it here for simplicity
                 if (toastId) {
                     addToRemoveQueue(toastId);
                 } else {

@@ -16,7 +16,6 @@ const api = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axio
         "Content-Type": "application/json"
     }
 });
-// Add token to requests
 api.interceptors.request.use((config)=>{
     if ("TURBOPACK compile-time truthy", 1) {
         const token = localStorage.getItem("access_token");
@@ -28,7 +27,6 @@ api.interceptors.request.use((config)=>{
 }, (error)=>{
     return Promise.reject(error);
 });
-// Handle 401 errors
 api.interceptors.response.use((response)=>response, async (error)=>{
     const originalRequest = error.config;
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -84,7 +82,6 @@ function AuthProvider({ children }) {
     const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
-    // Load user from localStorage on mount
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AuthProvider.useEffect": ()=>{
             const loadUser = {
@@ -97,7 +94,6 @@ function AuthProvider({ children }) {
                             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].get("/auth/me/");
                             setUser(response.data);
                         } catch (error) {
-                            // Token might be expired, try to refresh
                             await refreshToken();
                         }
                     }
@@ -107,15 +103,13 @@ function AuthProvider({ children }) {
             loadUser();
         }
     }["AuthProvider.useEffect"], []);
-    // Auto-refresh token before it expires
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AuthProvider.useEffect": ()=>{
             const interval = setInterval({
                 "AuthProvider.useEffect.interval": ()=>{
                     refreshToken();
                 }
-            }["AuthProvider.useEffect.interval"], 50 * 60 * 1000) // Refresh every 50 minutes (token expires in 1 hour)
-            ;
+            }["AuthProvider.useEffect.interval"], 50 * 60 * 1000);
             return ({
                 "AuthProvider.useEffect": ()=>clearInterval(interval)
             })["AuthProvider.useEffect"];
@@ -142,7 +136,6 @@ function AuthProvider({ children }) {
             password,
             password_confirm
         });
-        // Auto-login after registration
         await login(email, password);
     };
     const logout = ()=>{
@@ -164,11 +157,9 @@ function AuthProvider({ children }) {
             });
             const { access } = response.data;
             localStorage.setItem("access_token", access);
-            // Update user data
             const userResponse = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].get("/auth/me/");
             setUser(userResponse.data);
         } catch (error) {
-            // Refresh token is invalid, logout
             logout();
         }
     };
@@ -184,7 +175,7 @@ function AuthProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/lib/auth-context.tsx",
-        lineNumber: 122,
+        lineNumber: 117,
         columnNumber: 5
     }, this);
 }
@@ -272,8 +263,6 @@ const reducer = (state, action)=>{
         case 'DISMISS_TOAST':
             {
                 const { toastId } = action;
-                // ! Side effects ! - This could be extracted into a dismissToast() action,
-                // but I'll keep it here for simplicity
                 if (toastId) {
                     addToRemoveQueue(toastId);
                 } else {
