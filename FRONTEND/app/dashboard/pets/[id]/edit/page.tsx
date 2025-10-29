@@ -96,56 +96,82 @@ export default function EditPetPage() {
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    if (!file.type.startsWith("image/")) {
-      toast({
-        title: "Error",
-        description: "Por favor selecciona un archivo de imagen válido",
-        variant: "destructive",
-      })
-      return
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      toast({
-        title: "Error",
-        description: "La imagen no debe superar los 5MB",
-        variant: "destructive",
-      })
-      return
-    }
-
-    setUploadingImage(true)
-
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+  
+    const MAX_SIZE_MB = 5;
+    const CLOUDINARY_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL || "";
+    const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "";
+  
+    const uploadedImages: string[] = [];
+  
+    setUploadingImage(true);
+  
     try {
-      const uploadFormData = new FormData()
-      uploadFormData.append("image", file)
-
-      await api.post(`/pets/${params.id}/add_image/`, uploadFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-
-      toast({
-        title: "Imagen agregada",
-        description: "La imagen se ha subido exitosamente",
-      })
-
-      fetchImages()
-      fetchPet()
+      for (const file of Array.from(files)) {
+        if (!file.type.startsWith("image/")) {
+          toast({
+            title: "Error",
+            description: `El archivo ${file.name} no es una imagen válida`,
+            variant: "destructive",
+          });
+          continue;
+        }
+  
+        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+          toast({
+            title: "Error",
+            description: `La imagen ${file.name} supera los ${MAX_SIZE_MB}MB`,
+            variant: "destructive",
+          });
+          continue;
+        }
+  
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", UPLOAD_PRESET);
+  
+        const response = await fetch(CLOUDINARY_URL, {
+          method: "POST",
+          body: formData,
+        });
+  
+        if (!response.ok) {
+          toast({
+            title: "Error",
+            description: `No se pudo subir ${file.name}`,
+            variant: "destructive",
+          });
+          continue;
+        }
+  
+        const data = await response.json();
+        uploadedImages.push(data.secure_url);
+      }
+  
+      if (uploadedImages.length > 0) {
+        toast({
+          title: "Imágenes subidas",
+          description: `${uploadedImages.length} imágenes subieron correctamente`,
+        });
+  
+        await api.post(`/pets/${params.id}/add_images/`, {
+          images: uploadedImages,
+        });
+  
+        fetchImages();
+        fetchPet();
+      }
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.response?.data?.error || "No se pudo subir la imagen",
+        description: "Ocurrió un error subiendo las imágenes",
         variant: "destructive",
-      })
+      });
     } finally {
-      setUploadingImage(false)
+      setUploadingImage(false);
     }
-  }
+  };
 
   const handleSetMainImage = async (imageId: number, imageUrl: string) => {
     try {

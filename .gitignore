@@ -46,6 +46,7 @@ credentials.json
 config.ini
 secrets.ini
 .env
+.env.local
 
 ### Logs and Temporary Files ###
 *.log
