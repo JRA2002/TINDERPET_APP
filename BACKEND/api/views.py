@@ -6,8 +6,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
-import cloudinary.uploader
+
 from .models import Pet, PetImage, Like, Match, Message, Pass
 from .serializers import (
     PetSerializer, PetCreateSerializer, LikeSerializer, 
@@ -19,7 +18,6 @@ User = get_user_model()
 
 class PetViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsPetOwner]
-    parser_classes = (JSONParser, MultiPartParser, FormParser)
     
     def get_serializer_class(self):
         if self.action == 'create':
@@ -63,40 +61,26 @@ class PetViewSet(viewsets.ModelViewSet):
         serializer = PetImageSerializer(images, many=True)
         return Response(serializer.data)
     
-    @action(detail=True, methods=['post'], parser_classes=[MultiPartParser, FormParser])
+    @action(detail=True, methods=['post'])
     @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
-    def add_image(self, request, pk=None):
+    def add_images(self, request, pk=None):
        
         pet = self.get_object()
+       
+        if not pet:
+            return Response({"error": "Mascota no encontrada"}, status=status.HTTP_404_NOT_FOUND)
+
+        images = request.data.get("images", [])
         
-        if 'image' not in request.FILES:
-            return Response(
-                {'error': 'No image file provided'}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        image_file = request.FILES['image']
-        
-        try:
-            upload_result = cloudinary.uploader.upload(
-                image_file,
-                folder='tinderpet',
-                resource_type='image'
-            )
-            
-            pet_image = PetImage.objects.create(
-                pet=pet,
-                image=upload_result['secure_url']
-            )
-            
-            serializer = PetImageSerializer(pet_image)
-            print(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except Exception as e:
-            return Response(
-                {'error': f'Failed to upload image: {str(e)}'}, 
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+        if not images or not isinstance(images, list):
+            return Response({"error": "Se requiere una lista de URLs"}, status=status.HTTP_400_BAD_REQUEST)
+
+        created_images = []
+        for url in images:
+            pet_image = PetImage.objects.create(pet=pet, image=url)
+            created_images.append({"id": pet_image.id, "url": pet_image.image})
+
+        return Response({"uploaded_images": created_images}, status=status.HTTP_201_CREATED)
     
     @action(detail=True, methods=['post'])
     def set_main_image(self, request, pk=None):
@@ -150,35 +134,6 @@ class PetViewSet(viewsets.ModelViewSet):
             return Response(
                 {'error': 'Image not found'}, 
                 status=status.HTTP_404_NOT_FOUND
-            )
-    
-    @action(detail=False, methods=['post'], parser_classes=[MultiPartParser, FormParser])
-    @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
-    def upload_image(self, request):
-
-        if 'image' not in request.FILES:
-            return Response(
-                {'error': 'No image file provided'}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        image_file = request.FILES['image']
-        
-        try:
-            upload_result = cloudinary.uploader.upload(
-                image_file,
-                folder='tinderpet',
-                resource_type='image'
-            )
-            
-            return Response({
-                'url': upload_result['secure_url'],
-                'public_id': upload_result['public_id']
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {'error': f'Failed to upload image: {str(e)}'}, 
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
 @api_view(['GET'])
