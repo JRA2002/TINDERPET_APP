@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
-import cloudinary.uploader
+
 from .models import Pet, PetImage, Like, Match, Message, Pass
 from .serializers import (
     PetSerializer, PetCreateSerializer, LikeSerializer, 
@@ -71,7 +71,7 @@ class PetViewSet(viewsets.ModelViewSet):
             return Response({"error": "Mascota no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
         images = request.data.get("images", [])
-        print("Received images:", images)
+        
         if not images or not isinstance(images, list):
             return Response({"error": "Se requiere una lista de URLs"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -134,35 +134,6 @@ class PetViewSet(viewsets.ModelViewSet):
             return Response(
                 {'error': 'Image not found'}, 
                 status=status.HTTP_404_NOT_FOUND
-            )
-    
-    @action(detail=False, methods=['post'])
-    @method_decorator(ratelimit(key='user', rate='50/h', method='POST'))
-    def upload_image(self, request):
-
-        if 'image' not in request.FILES:
-            return Response(
-                {'error': 'No image file provided'}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        image_file = request.FILES['image']
-        
-        try:
-            upload_result = cloudinary.uploader.upload(
-                image_file,
-                folder='tinderpet',
-                resource_type='image'
-            )
-            
-            return Response({
-                'url': upload_result['secure_url'],
-                'public_id': upload_result['public_id']
-            }, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(
-                {'error': f'Failed to upload image: {str(e)}'}, 
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
 @api_view(['GET'])

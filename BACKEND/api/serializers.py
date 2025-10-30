@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import Pet, PetImage, Like, Match, Message, Pass
-import cloudinary.uploader
 
 User = get_user_model()
 
