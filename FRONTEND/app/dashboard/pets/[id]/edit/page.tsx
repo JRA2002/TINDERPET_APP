@@ -16,6 +16,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { ArrowLeft, Trash2, Upload, Star, Check } from "lucide-react"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
+import { PetImage } from "@/types/pet"
 import Image from "next/image"
 import {
   AlertDialog,
@@ -29,11 +30,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-interface PetImage {
-  id: number
-  image: string
-  uploaded_at: string
-}
+
 
 export default function EditPetPage() {
   const router = useRouter()

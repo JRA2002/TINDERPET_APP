@@ -56,7 +56,6 @@ export default function MatchesPage() {
   const fetchData = async () => {
     try {
       const [matchesRes, petsRes] = await Promise.all([api.get("/matches/"), api.get("/pets/")])
-    
       setMatches(matchesRes.data)
       setUserPets(petsRes.data)
     } catch (error) {

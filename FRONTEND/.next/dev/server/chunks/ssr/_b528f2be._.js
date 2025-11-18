@@ -919,12 +919,12 @@ function EditPetPage() {
                 className: "h-8 w-8"
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                lineNumber: 269,
+                lineNumber: 266,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-            lineNumber: 268,
+            lineNumber: 265,
             columnNumber: 7
         }, this);
     }
@@ -946,29 +946,29 @@ function EditPetPage() {
                                     className: "mr-2 h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                    lineNumber: 280,
+                                    lineNumber: 277,
                                     columnNumber: 15
                                 }, this),
                                 "Volver"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                            lineNumber: 279,
+                            lineNumber: 276,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                        lineNumber: 278,
+                        lineNumber: 275,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                    lineNumber: 277,
+                    lineNumber: 274,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                lineNumber: 276,
+                lineNumber: 273,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -988,20 +988,20 @@ function EditPetPage() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                            lineNumber: 291,
+                                            lineNumber: 288,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
                                             children: "Sube fotos de tu mascota. Haz clic en la estrella para establecer la imagen principal."
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                            lineNumber: 292,
+                                            lineNumber: 289,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                    lineNumber: 290,
+                                    lineNumber: 287,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -1021,7 +1021,7 @@ function EditPetPage() {
                                                                     className: "object-cover"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                    lineNumber: 301,
+                                                                    lineNumber: 298,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1037,18 +1037,18 @@ function EditPetPage() {
                                                                                 className: "h-4 w-4 text-[#6bcf7f]"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 311,
+                                                                                lineNumber: 308,
                                                                                 columnNumber: 29
                                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$star$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Star$3e$__["Star"], {
                                                                                 className: "h-4 w-4"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 313,
+                                                                                lineNumber: 310,
                                                                                 columnNumber: 29
                                                                             }, this)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 303,
+                                                                            lineNumber: 300,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialog"], {
@@ -1064,17 +1064,17 @@ function EditPetPage() {
                                                                                             className: "h-4 w-4"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                            lineNumber: 319,
+                                                                                            lineNumber: 316,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                        lineNumber: 318,
+                                                                                        lineNumber: 315,
                                                                                         columnNumber: 29
                                                                                     }, this)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                    lineNumber: 317,
+                                                                                    lineNumber: 314,
                                                                                     columnNumber: 27
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogContent"], {
@@ -1085,20 +1085,20 @@ function EditPetPage() {
                                                                                                     children: "¿Eliminar esta foto?"
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                                    lineNumber: 324,
+                                                                                                    lineNumber: 321,
                                                                                                     columnNumber: 31
                                                                                                 }, this),
                                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
                                                                                                     children: "Esta acción no se puede deshacer. La foto será eliminada permanentemente."
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                                    lineNumber: 325,
+                                                                                                    lineNumber: 322,
                                                                                                     columnNumber: 31
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, void 0, true, {
                                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                            lineNumber: 323,
+                                                                                            lineNumber: 320,
                                                                                             columnNumber: 29
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -1107,7 +1107,7 @@ function EditPetPage() {
                                                                                                     children: "Cancelar"
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                                    lineNumber: 330,
+                                                                                                    lineNumber: 327,
                                                                                                     columnNumber: 31
                                                                                                 }, this),
                                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogAction"], {
@@ -1116,31 +1116,31 @@ function EditPetPage() {
                                                                                                     children: "Eliminar"
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                                    lineNumber: 331,
+                                                                                                    lineNumber: 328,
                                                                                                     columnNumber: 31
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, void 0, true, {
                                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                            lineNumber: 329,
+                                                                                            lineNumber: 326,
                                                                                             columnNumber: 29
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                    lineNumber: 322,
+                                                                                    lineNumber: 319,
                                                                                     columnNumber: 27
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 316,
+                                                                            lineNumber: 313,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                    lineNumber: 302,
+                                                                    lineNumber: 299,
                                                                     columnNumber: 23
                                                                 }, this),
                                                                 mainImageUrl === img.image && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1149,18 +1149,18 @@ function EditPetPage() {
                                                                         className: "h-4 w-4 fill-white text-white"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 343,
+                                                                        lineNumber: 340,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                    lineNumber: 342,
+                                                                    lineNumber: 339,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, img.id, true, {
                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                            lineNumber: 300,
+                                                            lineNumber: 297,
                                                             columnNumber: 21
                                                         }, this)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1175,7 +1175,7 @@ function EditPetPage() {
                                                                 disabled: uploadingImage
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 350,
+                                                                lineNumber: 347,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Label"], {
@@ -1185,7 +1185,7 @@ function EditPetPage() {
                                                                     className: "h-8 w-8"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                    lineNumber: 363,
+                                                                    lineNumber: 360,
                                                                     columnNumber: 25
                                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
                                                                     children: [
@@ -1193,7 +1193,7 @@ function EditPetPage() {
                                                                             className: "h-8 w-8 text-muted-foreground"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 366,
+                                                                            lineNumber: 363,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1201,26 +1201,26 @@ function EditPetPage() {
                                                                             children: "Agregar foto"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 367,
+                                                                            lineNumber: 364,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 358,
+                                                                lineNumber: 355,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 349,
+                                                        lineNumber: 346,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 298,
+                                                lineNumber: 295,
                                                 columnNumber: 17
                                             }, this),
                                             images.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1228,24 +1228,24 @@ function EditPetPage() {
                                                 children: "No hay fotos aún. Agrega la primera foto de tu mascota."
                                             }, void 0, false, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 375,
+                                                lineNumber: 372,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                        lineNumber: 297,
+                                        lineNumber: 294,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                    lineNumber: 296,
+                                    lineNumber: 293,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                            lineNumber: 289,
+                            lineNumber: 286,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Card"], {
@@ -1257,20 +1257,20 @@ function EditPetPage() {
                                             children: "Información de la Mascota"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                            lineNumber: 385,
+                                            lineNumber: 382,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardDescription"], {
                                             children: "Actualiza los datos del perfil"
                                         }, void 0, false, {
                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                            lineNumber: 386,
+                                            lineNumber: 383,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                    lineNumber: 384,
+                                    lineNumber: 381,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -1286,7 +1286,7 @@ function EditPetPage() {
                                                         children: "Nombre *"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 391,
+                                                        lineNumber: 388,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1300,13 +1300,13 @@ function EditPetPage() {
                                                         required: true
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 392,
+                                                        lineNumber: 389,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 390,
+                                                lineNumber: 387,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1320,7 +1320,7 @@ function EditPetPage() {
                                                                 children: "Tipo de Mascota *"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 403,
+                                                                lineNumber: 400,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Select"], {
@@ -1336,12 +1336,12 @@ function EditPetPage() {
                                                                             placeholder: "Selecciona"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 410,
+                                                                            lineNumber: 407,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 409,
+                                                                        lineNumber: 406,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -1351,7 +1351,7 @@ function EditPetPage() {
                                                                                 children: "Perro"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 413,
+                                                                                lineNumber: 410,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1359,7 +1359,7 @@ function EditPetPage() {
                                                                                 children: "Gato"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 414,
+                                                                                lineNumber: 411,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1367,7 +1367,7 @@ function EditPetPage() {
                                                                                 children: "Ave"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 415,
+                                                                                lineNumber: 412,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1375,7 +1375,7 @@ function EditPetPage() {
                                                                                 children: "Conejo"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 416,
+                                                                                lineNumber: 413,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1383,25 +1383,25 @@ function EditPetPage() {
                                                                                 children: "Otro"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 417,
+                                                                                lineNumber: 414,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 412,
+                                                                        lineNumber: 409,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 404,
+                                                                lineNumber: 401,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 402,
+                                                        lineNumber: 399,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1412,7 +1412,7 @@ function EditPetPage() {
                                                                 children: "Raza *"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 423,
+                                                                lineNumber: 420,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1426,19 +1426,19 @@ function EditPetPage() {
                                                                 required: true
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 424,
+                                                                lineNumber: 421,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 422,
+                                                        lineNumber: 419,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 401,
+                                                lineNumber: 398,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1452,7 +1452,7 @@ function EditPetPage() {
                                                                 children: "Edad (años) *"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 436,
+                                                                lineNumber: 433,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Input"], {
@@ -1469,13 +1469,13 @@ function EditPetPage() {
                                                                 required: true
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 437,
+                                                                lineNumber: 434,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 435,
+                                                        lineNumber: 432,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1486,7 +1486,7 @@ function EditPetPage() {
                                                                 children: "Género *"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 450,
+                                                                lineNumber: 447,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Select"], {
@@ -1502,12 +1502,12 @@ function EditPetPage() {
                                                                             placeholder: "Selecciona"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 457,
+                                                                            lineNumber: 454,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 456,
+                                                                        lineNumber: 453,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectContent"], {
@@ -1517,7 +1517,7 @@ function EditPetPage() {
                                                                                 children: "Macho"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 460,
+                                                                                lineNumber: 457,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$select$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SelectItem"], {
@@ -1525,31 +1525,31 @@ function EditPetPage() {
                                                                                 children: "Hembra"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 461,
+                                                                                lineNumber: 458,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 459,
+                                                                        lineNumber: 456,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 451,
+                                                                lineNumber: 448,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 449,
+                                                        lineNumber: 446,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 434,
+                                                lineNumber: 431,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1560,7 +1560,7 @@ function EditPetPage() {
                                                         children: "Biografía *"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 468,
+                                                        lineNumber: 465,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -1576,7 +1576,7 @@ function EditPetPage() {
                                                         required: true
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 469,
+                                                        lineNumber: 466,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1587,13 +1587,13 @@ function EditPetPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 478,
+                                                        lineNumber: 475,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 467,
+                                                lineNumber: 464,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1612,19 +1612,19 @@ function EditPetPage() {
                                                                             className: "mr-2 h-4 w-4"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                            lineNumber: 485,
+                                                                            lineNumber: 482,
                                                                             columnNumber: 25
                                                                         }, this),
                                                                         "Eliminar"
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                    lineNumber: 484,
+                                                                    lineNumber: 481,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 483,
+                                                                lineNumber: 480,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogContent"], {
@@ -1635,20 +1635,20 @@ function EditPetPage() {
                                                                                 children: "¿Estás seguro?"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 491,
+                                                                                lineNumber: 488,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogDescription"], {
                                                                                 children: "Esta acción no se puede deshacer. Se eliminará permanentemente el perfil de tu mascota y todos sus datos asociados."
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 492,
+                                                                                lineNumber: 489,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 490,
+                                                                        lineNumber: 487,
                                                                         columnNumber: 23
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogFooter"], {
@@ -1657,7 +1657,7 @@ function EditPetPage() {
                                                                                 children: "Cancelar"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 498,
+                                                                                lineNumber: 495,
                                                                                 columnNumber: 25
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$alert$2d$dialog$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AlertDialogAction"], {
@@ -1666,25 +1666,25 @@ function EditPetPage() {
                                                                                 children: "Eliminar"
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                                lineNumber: 499,
+                                                                                lineNumber: 496,
                                                                                 columnNumber: 25
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                        lineNumber: 497,
+                                                                        lineNumber: 494,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 489,
+                                                                lineNumber: 486,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 482,
+                                                        lineNumber: 479,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1698,7 +1698,7 @@ function EditPetPage() {
                                                                 children: "Cancelar"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 510,
+                                                                lineNumber: 507,
                                                                 columnNumber: 21
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -1708,53 +1708,53 @@ function EditPetPage() {
                                                                 children: saving ? "Guardando..." : "Guardar Cambios"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                                lineNumber: 518,
+                                                                lineNumber: 515,
                                                                 columnNumber: 21
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                        lineNumber: 509,
+                                                        lineNumber: 506,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                                lineNumber: 481,
+                                                lineNumber: 478,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                        lineNumber: 389,
+                                        lineNumber: 386,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                                    lineNumber: 388,
+                                    lineNumber: 385,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                            lineNumber: 383,
+                            lineNumber: 380,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                    lineNumber: 288,
+                    lineNumber: 285,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-                lineNumber: 287,
+                lineNumber: 284,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/dashboard/pets/[id]/edit/page.tsx",
-        lineNumber: 275,
+        lineNumber: 272,
         columnNumber: 5
     }, this);
 }

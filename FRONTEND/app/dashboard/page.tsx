@@ -11,18 +11,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { Plus, Edit, Heart, MessageCircle, LogOut, Check } from "lucide-react"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
-
-interface Pet {
-  id: number
-  name: string
-  pet_type: string
-  breed: string
-  age: number
-  gender: string
-  bio: string
-  main_image: string
-  is_active: boolean
-}
+import { Pet } from "@/types/pet"
 
 export default function DashboardPage() {
   const { user, loading: authLoading, logout } = useAuth()
@@ -235,4 +224,3 @@ export default function DashboardPage() {
     </div>
   )
 }
-

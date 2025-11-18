@@ -530,6 +530,12 @@ function DiscoverPage() {
         open: false,
         match: null
     });
+    const [dragStart, setDragStart] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [dragOffset, setDragOffset] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        x: 0,
+        y: 0
+    });
+    const [isDragging, setIsDragging] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "DiscoverPage.useEffect": ()=>{
             if (!authLoading && !user) {
@@ -580,7 +586,6 @@ function DiscoverPage() {
     const fetchDiscoverPets = async (petId)=>{
         try {
             const response = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].get(`/discover/?pet_id=${petId}`);
-            console.log("[v0] Discover pets response:", response.data);
             setPets(response.data);
         } catch (error) {
             console.error("Error fetching discover pets:", error);
@@ -637,14 +642,12 @@ function DiscoverPage() {
         }
     };
     const handlePreviousPhoto = ()=>{
-        console.log("[v0] Previous photo clicked, current index:", currentPhotoIndex);
         if (currentPhotoIndex > 0) {
             setCurrentPhotoIndex(currentPhotoIndex - 1);
         }
     };
     const handleNextPhoto = ()=>{
         const totalPhotos = getCurrentPetPhotos().length;
-        console.log("[v0] Next photo clicked, current index:", currentPhotoIndex, "total photos:", totalPhotos);
         if (currentPhotoIndex < totalPhotos - 1) {
             setCurrentPhotoIndex(currentPhotoIndex + 1);
         }
@@ -663,7 +666,6 @@ function DiscoverPage() {
                 }
             });
         }
-        console.log("[v0] Current pet photos:", photos);
         return photos;
     };
     if (authLoading || loading) {
@@ -673,12 +675,12 @@ function DiscoverPage() {
                 className: "h-8 w-8"
             }, void 0, false, {
                 fileName: "[project]/app/discover/page.tsx",
-                lineNumber: 205,
+                lineNumber: 179,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/discover/page.tsx",
-            lineNumber: 204,
+            lineNumber: 178,
             columnNumber: 7
         }, this);
     }
@@ -687,13 +689,37 @@ function DiscoverPage() {
     const currentPetPhotos = hasMorePets ? getCurrentPetPhotos() : [];
     const totalPhotos = currentPetPhotos.length;
     const currentPhoto = currentPetPhotos[currentPhotoIndex] || "/placeholder.svg?height=600&width=450";
-    console.log("[v0] Render state:", {
-        currentIndex,
-        currentPhotoIndex,
-        totalPhotos,
-        hasMorePets,
-        currentPet: currentPet?.name
-    });
+    const SWIPE_THRESHOLD = 120;
+    const handleDragStart = (e)=>{
+        const point = "touches" in e ? e.touches[0] : e;
+        setDragStart({
+            x: point.clientX,
+            y: point.clientY
+        });
+        setIsDragging(true);
+    };
+    const handleDragMove = (e)=>{
+        if (!isDragging || !dragStart) return;
+        const point = "touches" in e ? e.touches[0] : e;
+        setDragOffset({
+            x: point.clientX - dragStart.x,
+            y: point.clientY - dragStart.y
+        });
+    };
+    const handleDragEnd = ()=>{
+        if (!isDragging) return;
+        setIsDragging(false);
+        if (dragOffset.x > SWIPE_THRESHOLD) {
+            handleLike();
+        } else if (dragOffset.x < -SWIPE_THRESHOLD) {
+            handlePass();
+        }
+        setDragOffset({
+            x: 0,
+            y: 0
+        });
+        setDragStart(null);
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50",
         children: [
@@ -713,19 +739,19 @@ function DiscoverPage() {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 230,
+                                        lineNumber: 228,
                                         columnNumber: 15
                                     }, this),
                                     "Dashboard"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 229,
+                                lineNumber: 227,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 228,
+                            lineNumber: 226,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -735,12 +761,12 @@ function DiscoverPage() {
                                 children: "Descubrir"
                             }, void 0, false, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 235,
+                                lineNumber: 233,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 234,
+                            lineNumber: 232,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -752,23 +778,23 @@ function DiscoverPage() {
                                 children: "Matches"
                             }, void 0, false, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 240,
+                                lineNumber: 238,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 239,
+                            lineNumber: 237,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/discover/page.tsx",
-                    lineNumber: 227,
+                    lineNumber: 225,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/discover/page.tsx",
-                lineNumber: 226,
+                lineNumber: 224,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -784,12 +810,12 @@ function DiscoverPage() {
                                     className: "h-12 w-12 text-muted-foreground"
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 250,
+                                    lineNumber: 248,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 249,
+                                lineNumber: 247,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -797,7 +823,7 @@ function DiscoverPage() {
                                 children: "No hay más mascotas por ahora"
                             }, void 0, false, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 252,
+                                lineNumber: 250,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -805,7 +831,7 @@ function DiscoverPage() {
                                 children: "Vuelve más tarde para ver nuevos perfiles"
                             }, void 0, false, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 253,
+                                lineNumber: 251,
                                 columnNumber: 15
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -816,23 +842,23 @@ function DiscoverPage() {
                                     children: "Volver al Dashboard"
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 257,
+                                    lineNumber: 255,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 256,
+                                lineNumber: 254,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/discover/page.tsx",
-                        lineNumber: 248,
+                        lineNumber: 246,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/discover/page.tsx",
-                    lineNumber: 247,
+                    lineNumber: 245,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "w-full space-y-6",
@@ -848,22 +874,33 @@ function DiscoverPage() {
                                         children: activePet.name
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 266,
+                                        lineNumber: 264,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 265,
+                                lineNumber: 263,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 264,
+                            lineNumber: 262,
                             columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
-                            className: "overflow-hidden shadow-xl",
+                            className: "overflow-hidden shadow-xl touch-none select-none",
+                            onMouseDown: handleDragStart,
+                            onMouseMove: handleDragMove,
+                            onMouseUp: handleDragEnd,
+                            onMouseLeave: handleDragEnd,
+                            onTouchStart: handleDragStart,
+                            onTouchMove: handleDragMove,
+                            onTouchEnd: handleDragEnd,
+                            style: {
+                                transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.05}deg)`,
+                                transition: isDragging ? "none" : "transform 0.25s ease"
+                            },
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "relative aspect-[3/4]",
                                 children: [
@@ -873,7 +910,7 @@ function DiscoverPage() {
                                         className: "h-full w-full object-cover"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 273,
+                                        lineNumber: 285,
                                         columnNumber: 17
                                     }, this),
                                     totalPhotos > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -884,12 +921,12 @@ function DiscoverPage() {
                                                         className: `h-1 flex-1 rounded-full transition-all ${index === currentPhotoIndex ? "bg-white" : "bg-white/40"}`
                                                     }, index, false, {
                                                         fileName: "[project]/app/discover/page.tsx",
-                                                        lineNumber: 283,
+                                                        lineNumber: 295,
                                                         columnNumber: 25
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 281,
+                                                lineNumber: 293,
                                                 columnNumber: 21
                                             }, this),
                                             currentPhotoIndex > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -904,12 +941,12 @@ function DiscoverPage() {
                                                     className: "h-6 w-6"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/discover/page.tsx",
-                                                    lineNumber: 302,
+                                                    lineNumber: 314,
                                                     columnNumber: 25
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 293,
+                                                lineNumber: 305,
                                                 columnNumber: 23
                                             }, this),
                                             currentPhotoIndex < totalPhotos - 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -924,12 +961,12 @@ function DiscoverPage() {
                                                     className: "h-6 w-6"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/discover/page.tsx",
-                                                    lineNumber: 316,
+                                                    lineNumber: 328,
                                                     columnNumber: 25
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 307,
+                                                lineNumber: 319,
                                                 columnNumber: 23
                                             }, this)
                                         ]
@@ -938,7 +975,7 @@ function DiscoverPage() {
                                         className: "pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 322,
+                                        lineNumber: 334,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -952,7 +989,7 @@ function DiscoverPage() {
                                                         children: currentPet.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/discover/page.tsx",
-                                                        lineNumber: 326,
+                                                        lineNumber: 338,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
@@ -965,13 +1002,13 @@ function DiscoverPage() {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/discover/page.tsx",
-                                                        lineNumber: 327,
+                                                        lineNumber: 339,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 325,
+                                                lineNumber: 337,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -979,7 +1016,7 @@ function DiscoverPage() {
                                                 children: currentPet.breed
                                             }, void 0, false, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 331,
+                                                lineNumber: 343,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -987,7 +1024,7 @@ function DiscoverPage() {
                                                 children: currentPet.bio
                                             }, void 0, false, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 332,
+                                                lineNumber: 344,
                                                 columnNumber: 19
                                             }, this),
                                             totalPhotos > 1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1000,25 +1037,25 @@ function DiscoverPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/discover/page.tsx",
-                                                lineNumber: 334,
+                                                lineNumber: 346,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 324,
+                                        lineNumber: 336,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 272,
+                                lineNumber: 284,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 271,
-                            columnNumber: 13
+                            lineNumber: 269,
+                            columnNumber: 15
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex items-center justify-center gap-6",
@@ -1033,12 +1070,12 @@ function DiscoverPage() {
                                         className: "h-8 w-8 text-red-500"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 350,
+                                        lineNumber: 362,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 343,
+                                    lineNumber: 355,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1050,18 +1087,18 @@ function DiscoverPage() {
                                         className: "h-10 w-10 fill-white text-white"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 359,
+                                        lineNumber: 371,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 353,
+                                    lineNumber: 365,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 342,
+                            lineNumber: 354,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1076,23 +1113,23 @@ function DiscoverPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/discover/page.tsx",
-                                lineNumber: 364,
+                                lineNumber: 376,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 363,
+                            lineNumber: 375,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/discover/page.tsx",
-                    lineNumber: 262,
+                    lineNumber: 260,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/discover/page.tsx",
-                lineNumber: 245,
+                lineNumber: 243,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Dialog"], {
@@ -1113,31 +1150,31 @@ function DiscoverPage() {
                                         children: "¡Es un Match!"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 376,
+                                        lineNumber: 388,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 375,
+                                    lineNumber: 387,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$dialog$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["DialogDescription"], {
                                     className: "text-center",
                                     children: [
                                         "A ",
-                                        matchDialog.match?.pet2.name || matchDialog.match?.pet1.name,
+                                        matchDialog.match?.pet2_details.name || matchDialog.match?.pet1_details.name,
                                         " también le gustó ",
                                         activePet?.name
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 380,
+                                    lineNumber: 392,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 374,
+                            lineNumber: 386,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1151,41 +1188,41 @@ function DiscoverPage() {
                                         className: "h-full w-full object-cover"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 386,
+                                        lineNumber: 398,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 385,
+                                    lineNumber: 397,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
                                     className: "h-8 w-8 fill-[#ff6b9d] text-[#ff6b9d]"
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 392,
+                                    lineNumber: 404,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "relative h-24 w-24 overflow-hidden rounded-full border-4 border-[#ffd93d]",
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                        src: matchDialog.match?.pet2.id === activePet?.id ? matchDialog.match?.pet1.main_image : matchDialog.match?.pet2.main_image || "/placeholder.svg?height=96&width=96",
-                                        alt: matchDialog.match?.pet2.id === activePet?.id ? matchDialog.match?.pet1.name : matchDialog.match?.pet2.name,
+                                        src: matchDialog.match?.pet2_details.id === activePet?.id ? matchDialog.match?.pet1_details.main_image : matchDialog.match?.pet2_details.main_image || "/placeholder.svg?height=96&width=96",
+                                        alt: matchDialog.match?.pet2_details.id === activePet?.id ? matchDialog.match?.pet1_details.name : matchDialog.match?.pet2_details.name,
                                         className: "h-full w-full object-cover"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 394,
+                                        lineNumber: 406,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 393,
+                                    lineNumber: 405,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 384,
+                            lineNumber: 396,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1201,7 +1238,7 @@ function DiscoverPage() {
                                     children: "Seguir Descubriendo"
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 410,
+                                    lineNumber: 422,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -1216,39 +1253,39 @@ function DiscoverPage() {
                                         children: "Ver Matches"
                                     }, void 0, false, {
                                         fileName: "[project]/app/discover/page.tsx",
-                                        lineNumber: 418,
+                                        lineNumber: 430,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/discover/page.tsx",
-                                    lineNumber: 417,
+                                    lineNumber: 429,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/discover/page.tsx",
-                            lineNumber: 409,
+                            lineNumber: 421,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/discover/page.tsx",
-                    lineNumber: 373,
+                    lineNumber: 385,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/discover/page.tsx",
-                lineNumber: 372,
+                lineNumber: 384,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/discover/page.tsx",
-        lineNumber: 225,
+        lineNumber: 223,
         columnNumber: 5
     }, this);
 }
-_s(DiscoverPage, "mbswkrqeOIpWcRFQG47WrIfNqHc=", false, function() {
+_s(DiscoverPage, "IO4fV++WluA63CzkAuef73jbhyA=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$auth$2d$context$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],

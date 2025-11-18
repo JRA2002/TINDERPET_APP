@@ -79,7 +79,6 @@ export default function ChatPage() {
     scrollToBottom()
   }, [messages])
 
-  // Poll for new messages every 3 seconds
   useEffect(() => {
     if (!match) return
 
@@ -99,7 +98,6 @@ export default function ChatPage() {
       const [matchesRes, petsRes] = await Promise.all([api.get("/matches/"), api.get("/pets/")])
 
       const currentMatch = matchesRes.data.find((m: Match) => m.id === Number(params.matchId))
-      console.log("aqui esta el match que quiero encontrar:", currentMatch)
       if (!currentMatch) {
         toast({
           title: "Match no encontrado",
@@ -122,7 +120,6 @@ export default function ChatPage() {
 
       await fetchMessages()
     } catch (error) {
-      console.error("Error fetching data:", error)
       toast({
         title: "Error",
         description: "No se pudo cargar la conversación",
@@ -138,7 +135,6 @@ export default function ChatPage() {
       const response = await api.get(`/matches/${params.matchId}/messages/`)
       setMessages(response.data)
 
-      // Mark messages as read
       await api.patch(`/matches/${params.matchId}/messages/read/`)
     } catch (error) {
       console.error("Error fetching messages:", error)

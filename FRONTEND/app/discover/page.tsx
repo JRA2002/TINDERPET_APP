@@ -12,32 +12,8 @@ import { Heart, X, ArrowLeft, Sparkles, ChevronLeft, ChevronRight } from "lucide
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-
-interface PetImage {
-  id: number
-  image: string
-  uploaded_at: string
-}
-
-interface Pet {
-  id: number
-  name: string
-  pet_type: string
-  breed: string
-  age: number
-  gender: string
-  bio: string
-  main_image: string
-  is_active: boolean
-  images: PetImage[]
-}
-
-interface Match {
-  id: number
-  pet1: Pet
-  pet2: Pet
-  created_at: string
-}
+import { Pet } from "@/types/pet"
+import { Match } from "@/types/discover"
 
 export default function DiscoverPage() {
   const { user, loading: authLoading } = useAuth()
@@ -53,6 +29,9 @@ export default function DiscoverPage() {
     open: false,
     match: null,
   })
+  const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null)
+  const [dragOffset, setDragOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -99,7 +78,6 @@ export default function DiscoverPage() {
   const fetchDiscoverPets = async (petId: number) => {
     try {
       const response = await api.get(`/discover/?pet_id=${petId}`)
-      console.log("[v0] Discover pets response:", response.data)
       setPets(response.data)
     } catch (error) {
       console.error("Error fetching discover pets:", error)
@@ -163,7 +141,6 @@ export default function DiscoverPage() {
   }
 
   const handlePreviousPhoto = () => {
-    console.log("[v0] Previous photo clicked, current index:", currentPhotoIndex)
     if (currentPhotoIndex > 0) {
       setCurrentPhotoIndex(currentPhotoIndex - 1)
     }
@@ -171,7 +148,6 @@ export default function DiscoverPage() {
 
   const handleNextPhoto = () => {
     const totalPhotos = getCurrentPetPhotos().length
-    console.log("[v0] Next photo clicked, current index:", currentPhotoIndex, "total photos:", totalPhotos)
     if (currentPhotoIndex < totalPhotos - 1) {
       setCurrentPhotoIndex(currentPhotoIndex + 1)
     }
@@ -194,8 +170,6 @@ export default function DiscoverPage() {
         }
       })
     }
-
-    console.log("[v0] Current pet photos:", photos)
     return photos
   }
 
@@ -213,13 +187,37 @@ export default function DiscoverPage() {
   const totalPhotos = currentPetPhotos.length
   const currentPhoto = currentPetPhotos[currentPhotoIndex] || "/placeholder.svg?height=600&width=450"
 
-  console.log("[v0] Render state:", {
-    currentIndex,
-    currentPhotoIndex,
-    totalPhotos,
-    hasMorePets,
-    currentPet: currentPet?.name,
+  const SWIPE_THRESHOLD = 120
+
+const handleDragStart = (e: React.TouchEvent | React.MouseEvent) => {
+  const point = "touches" in e ? e.touches[0] : e
+  setDragStart({ x: point.clientX, y: point.clientY })
+  setIsDragging(true)
+}
+
+const handleDragMove = (e: React.TouchEvent | React.MouseEvent) => {
+  if (!isDragging || !dragStart) return
+  const point = "touches" in e ? e.touches[0] : e
+  setDragOffset({
+    x: point.clientX - dragStart.x,
+    y: point.clientY - dragStart.y,
   })
+}
+
+const handleDragEnd = () => {
+  if (!isDragging) return
+  setIsDragging(false)
+
+  if (dragOffset.x > SWIPE_THRESHOLD) {
+    handleLike()
+  } else if (dragOffset.x < -SWIPE_THRESHOLD) {
+    handlePass()
+  }
+
+  setDragOffset({ x: 0, y: 0 })
+  setDragStart(null)
+}
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-yellow-50">
@@ -268,7 +266,21 @@ export default function DiscoverPage() {
               </div>
             )}
 
-            <Card className="overflow-hidden shadow-xl">
+              <Card
+                className="overflow-hidden shadow-xl touch-none select-none"
+                onMouseDown={handleDragStart}
+                onMouseMove={handleDragMove}
+                onMouseUp={handleDragEnd}
+                onMouseLeave={handleDragEnd}
+                onTouchStart={handleDragStart}
+                onTouchMove={handleDragMove}
+                onTouchEnd={handleDragEnd}
+                style={{
+                  transform: `translate(${dragOffset.x}px, ${dragOffset.y}px) rotate(${dragOffset.x * 0.05}deg)`,
+                  transition: isDragging ? "none" : "transform 0.25s ease",
+                }}
+              >
+
               <div className="relative aspect-[3/4]">
                 <img
                   src={currentPhoto || "/placeholder.svg"}
@@ -378,7 +390,7 @@ export default function DiscoverPage() {
               </span>
             </DialogTitle>
             <DialogDescription className="text-center">
-              A {matchDialog.match?.pet2.name || matchDialog.match?.pet1.name} también le gustó {activePet?.name}
+              A {matchDialog.match?.pet2_details.name || matchDialog.match?.pet1_details.name} también le gustó {activePet?.name}
             </DialogDescription>
           </DialogHeader>
           <div className="flex items-center justify-center gap-4 py-6">
@@ -393,14 +405,14 @@ export default function DiscoverPage() {
             <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-[#ffd93d]">
               <img
                 src={
-                  matchDialog.match?.pet2.id === activePet?.id
-                    ? matchDialog.match?.pet1.main_image
-                    : matchDialog.match?.pet2.main_image || "/placeholder.svg?height=96&width=96"
+                  matchDialog.match?.pet2_details.id === activePet?.id
+                    ? matchDialog.match?.pet1_details.main_image
+                    : matchDialog.match?.pet2_details.main_image || "/placeholder.svg?height=96&width=96"
                 }
                 alt={
-                  matchDialog.match?.pet2.id === activePet?.id
-                    ? matchDialog.match?.pet1.name
-                    : matchDialog.match?.pet2.name
+                  matchDialog.match?.pet2_details.id === activePet?.id
+                    ? matchDialog.match?.pet1_details.name
+                    : matchDialog.match?.pet2_details.name
                 }
                 className="h-full w-full object-cover"
               />
